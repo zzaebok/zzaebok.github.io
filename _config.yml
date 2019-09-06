@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "ZZAEBOK"
+title                    : "ZZAEBOK'S BLOG"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "zzaebok"
@@ -108,7 +108,7 @@ analytics:
 # Site Author
 author:
   name             : "zzaebok"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/KakaoTalk_20190906_232921668.png"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "I am an **amazing** person."
   location         : "Seoul, Korea"
   email            :
