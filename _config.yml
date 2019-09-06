@@ -109,7 +109,7 @@ analytics:
 author:
   name             : "zzaebok"
   avatar           : "/assets/images/KakaoTalk_20190906_232921668.png"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
+  bio              : "Life is **short**."
   location         : "Seoul, Korea"
   email            :
   links:
@@ -130,7 +130,7 @@ author:
       url: "https://github.com/zzaebok"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/zzaebok"
+      url: "https://instagram.com/zzae_bok"
 
 # Site Footer
 footer:
