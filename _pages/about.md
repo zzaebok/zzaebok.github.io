@@ -1,3 +1,11 @@
+---
+permalink: /about/
+title: "About"
+excerpt: "About"
+search: true
+---
+
+
 ## About me ##
 
 ### Interests ###
