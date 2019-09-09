@@ -6,8 +6,6 @@ search: true
 ---
 
 
-## About me ##
-
 ### Interests ###
 - Machine learning, Deep learning, Data analysis, Big data
 - Vision, NLP
