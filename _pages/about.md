@@ -41,6 +41,7 @@ search: true
   - Ensemble
 - Kaggle
 - Battery SoC estimation based on LSTM
+- Econometrics
 
 ### Language ###
 - Korean
