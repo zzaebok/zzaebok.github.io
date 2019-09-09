@@ -35,12 +35,12 @@ search: true
   - Finetuned Korean word embedding with Bi-LSTM, Attention, NTN structures
   - Crawled definitions of each Korean word with bs4
   - Gave sentiments over 5000 korean words
-  - https://github.com/zzaebok/ksenticnet
+  - [https://github.com/zzaebok/ksenticnet]
 - Real/Fake Image classication model
   - 2019 computer vision course project
   - Ensemble model using both Resnet and Densenet
   - Performance: 4th in over 40 teams in the class
-  - https://github.com/zzaebok/2019-Computer-Vision/tree/master/project
+  - [https://github.com/zzaebok/2019-Computer-Vision/tree/master/project]
 - Battery SoC estimation with deep learning model
   - During internship in Samsung research
   - Current, voltage, temperature as an input, Battery SoC as an output
