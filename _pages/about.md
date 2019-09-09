@@ -29,19 +29,31 @@ search: true
 
 ### Skills ###
 - Familiar with Python, previously used Java, C/C++
-- Have experiences in Pytorch / Tensorflow
+- Have experiences in deep learning frameworks Pytorch, Tensorflow
 - Samsung SW Certificate: Professional level (July 27, 2019)
 
 ### Projects ###
-- Korean sentiment resource
-  - Bi-LSTM, Attention, NTN
-  - url
-- Image classifier
-  - Computer vision course
-  - Ensemble
-- Kaggle
-- Battery SoC estimation based on LSTM
-- Econometrics
+- Korean sentiment resource KSenticNet
+  - Finetuned Korean word embedding with Bi-LSTM, Attention, NTN structures
+  - Crawled definitions of each Korean word with bs4
+  - Gave sentiments over 5000 korean words
+  - https://github.com/zzaebok/ksenticnet
+- Real/Fake Image classication model
+  - 2019 computer vision course project
+  - Ensemble model using both Resnet and Densenet
+  - Performance: 4th in over 40 teams in the class
+  - https://github.com/zzaebok/2019-Computer-Vision/tree/master/project
+- Battery SoC estimation with deep learning model
+  - During internship in Samsung research
+  - Current, voltage, temperature as an input, Battery SoC as an output
+  - Used LSTM and attention mechanism
+  - Confirmed applicability of Monte Carlo dropout to predict uncertainty
+- Cross sectional analysis of professors' salaries
+  - 2018 econometrics course project
+  - Used SAS statistics program
+  - Developed Mincer's earning function
+  - Salary was decided mainly by the 'number of papers per year' factor 
+  
 
 ### Language ###
 - Korean
@@ -50,8 +62,5 @@ search: true
   - OPic: AL (July 31, 2019)
 
 ### Volunteering ###
-- Samsung dream class (2015, 2018)
-
-
-
-
+- Samsung dream class
+  - Winter 2015, Summer 2015, Winter 2017 as a math teacher
