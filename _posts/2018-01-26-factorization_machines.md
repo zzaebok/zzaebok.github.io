@@ -42,9 +42,9 @@ Factorization machines 알고리즘은 이름 때문에 Matrix Factorization 방
 
 하지만 추가적으로 입력하는 feature가 많아질 수록 우리가 계산해야하는 $w_{ij}$는 많아진다. $$ n(n-1)/2 $$, 즉 $$O(n^2)$$의 시간복잡도를 가지게 된다. Factorization machines 알고리즘은 이 문제를 해결함에 있어 행렬이 분해될 수 있음을 이용한다. 즉, NxN의 행렬이 NxK, KxN으로 분해될 수 있으므로 NxK 크기의 행렬을 학습시켜 시간복잡도를 크게 줄일 수 있다.
 
-```
+`
 Any positive semi-definite matrix W∈Rn×n can be decomposed into VV⊤ (e.g., Cholesky Decomposition). The FM model can express any pairwise interaction matrix W=VV⊤ provided that the k chosen is reasonably large enough. V∈Rk where k≪n is a hyper-parameter that defines the rank of the factorization.
-```
+`
 
 그렇다면 $w_{ij}$는 어떻게 구할 수 있을까? 바로 NxK 크기의 V 행렬의 i번 째 행과 j번 째 행을 내적하여 얻을 수 있다. 여기서 주의할 점은 N이 각 feature 개수의 총 합이라는 것이다. 즉, user가 10차원, item이 20차원, category가 11차원이라면 N은 10+20+11 = 41이 된다. k는 정보를 충분히 담을 수 있는 수로 정해지고 latent space의 차원이라고 생각할 수 있다. 따라서 우리는 Polynomial regression 문제를 다음과 같이 쓸 수 있다.
 
