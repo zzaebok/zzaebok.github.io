@@ -56,5 +56,27 @@ categories: Machine_Learning
 prior가 0.1%가 아닌 9%를 사용하게 되고(양성이 나왔다는 사실을 반영해야 하므로) 사후확률 91%를 얻게 되었다.
 
 ## 베이즈 정리와 머신 러닝 ##
+그렇다면 이 베이즈 정리와 머신 러닝은 어떠한 문맥에서 공통점을 공유할 수 있을까?
+머신 러닝을 대분류로 분류해보면 크게 regression과 classification으로 나타낼 수 있다.
+먼저 Regression 문제를 살펴보자. 가장 기본적인 Linear regression을 보면 독립변수와 종속변수의 관계에 대해 추론하는 것이라고 할 수 있다.
+![linear regression](https://miro.medium.com/max/1182/1*4Y-w0Em_qLcIdIxKBDDnkQ.png)
 
--- 공부중입니다 --
+이러한 식을 통해 만든 추정치 $$y_hat$$와 실제 $$y$$의 차이 (Loss)를 최소화 하는 것이 이 regression의 목표이다.
+머신 러닝은 Gradient Descent와 같은 알고리즘을 통해 '점진적으로' 학습하여 parameter를 찾아간다.
+그런데 조금 시선을 바꿔서 우리가 추정하고자 하는 $$theta_0$$과 $$theta_1$$이 하나의 특정한 값을 갖는 것이 아니라
+분포를 갖는다고 생각해보자.
+그렇게 하면 우리는 머신 러닝이 parameter를 찾는 과정을 베이즈 정리를 이용해서 표현할 수 있게 되는데 다음과 같다.
+![machine learning bayes](https://miro.medium.com/max/480/1*gdgddVSaJQ_BXWJJNYtZ9g.png)
+
+즉, 우리는 P(model)이라는 prior를 알고 있는데 새로운 data가 관측이 되면 posterior(P(model|data))를 얻고 이를
+다음번 학습의 prior로 사용하면서 점진적으로 P(model), 즉 parameter들의 분포를 찾아가는 과정이 머신러닝 과정인 것이다.
+![MAP](https://miro.medium.com/max/486/1*KmnRZ_zc_cD7CIWylEyrFg.png)
+
+Classification에서도 regression과 다를 바가 하나도 없다.
+![machine learning bayes classification](https://miro.medium.com/max/502/1*c63H7VlsTrcntMc5P2v7aw.png)
+
+이렇게 Prior를 업데이트 하는 것이 뭐가 중요하냐라고 생각할 수 있지만,
+![male vs female](https://miro.medium.com/max/884/1*okTibKIXXCSLC3ZuKqKwPQ.png)
+
+위 그림과 같이 어떤 classifier가 prior를 고려하는 지 안하는지의 유무에 따라 분류기 성능이 크게 갈릴 수 있다.
+단순히 표본을 이용한 MLE의 결과보다 prior를 고려하는 베이지안 방법이 조금 더 맞는 설명일 것이라.
