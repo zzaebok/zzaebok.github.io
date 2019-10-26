@@ -16,7 +16,7 @@ categories: Machine_Learning
 
 ![bin_class](https://miro.medium.com/max/801/1*twrMncyWo2RV21D_9QVZgA.png)
 
-그림과 같이 각 class에 해당하는 distribution을 추정하고 새로운 $$\X_new$$라는 데이터를 probability density에 따라 여성으로 분류할 수 있겠다.
+그림과 같이 각 class에 해당하는 distribution을 추정하고 새로운 Xnew라는 데이터를 probability density에 따라 여성으로 분류할 수 있겠다.
 
 그러나 여기서 중요한 점은 어떻게 우리가 이러한 확률분포를 계산해낼 수 있냐는 것이다.
 먼저 우리가 데이터를 모으게 되면, 우리는 이 소중한 데이터를 가지고 Guess를 하게된다.
@@ -119,9 +119,9 @@ MSE라고 부르는 Loss function의 모양을 하고 있다.
 
 먼저 여기서 우변의 두 번째 항을 살펴보면, $$X$$ 와 $$\theta$$가 static이라고 가정하게 되는데
 이 경우 아까 우리가 세웠던 식에 따라 $$y_i$$는 error term의 분포 모양을 그대로 따르게 된다.
-즉, $$y_i$$는 평균이 $$f(\x_i|\theta)$$이고 분산이 $$\sigma^2$$인 가우시안 분포를 따르게 되는 것이다.
+즉, $$y_i$$는 평균이 $$f(x_i|\theta)$$이고 분산이 $$\sigma^2$$인 가우시안 분포를 따르게 되는 것이다.
 
-다시말해 data (X)와 parameter를 given으로 하였을 때 $$\y_i$$의 조건부 확률은 이러한 꼴이 된다.
+다시말해 data (X)와 parameter를 given으로 하였을 때 $$y_i$$의 조건부 확률은 이러한 꼴이 된다.
 
 ![y prob](https://miro.medium.com/max/1153/1*C1HELFGU5_gK-UmQf8oOeg.png)
 
