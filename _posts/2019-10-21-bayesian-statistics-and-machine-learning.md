@@ -61,9 +61,9 @@ prior가 0.1%가 아닌 9%를 사용하게 되고(양성이 나왔다는 사실�
 먼저 Regression 문제를 살펴보자. 가장 기본적인 Linear regression을 보면 독립변수와 종속변수의 관계에 대해 추론하는 것이라고 할 수 있다.
 ![linear regression](https://miro.medium.com/max/1182/1*4Y-w0Em_qLcIdIxKBDDnkQ.png)
 
-이러한 식을 통해 만든 추정치 $$y_hat$$와 실제 $$y$$의 차이 (Loss)를 최소화 하는 것이 이 regression의 목표이다.
+이러한 식을 통해 만든 추정치 $$\y_hat$$와 실제 $$y$$의 차이 (Loss)를 최소화 하는 것이 이 regression의 목표이다.
 머신 러닝은 Gradient Descent와 같은 알고리즘을 통해 '점진적으로' 학습하여 parameter를 찾아간다.
-그런데 조금 시선을 바꿔서 우리가 추정하고자 하는 $$theta_0$$과 $$theta_1$$이 하나의 특정한 값을 갖는 것이 아니라
+그런데 조금 시선을 바꿔서 우리가 추정하고자 하는 $$\theta_0$$과 $$\theta_1$$이 하나의 특정한 값을 갖는 것이 아니라
 분포를 갖는다고 생각해보자.
 그렇게 하면 우리는 머신 러닝이 parameter를 찾는 과정을 베이즈 정리를 이용해서 표현할 수 있게 되는데 다음과 같다.
 ![machine learning bayes](https://miro.medium.com/max/480/1*gdgddVSaJQ_BXWJJNYtZ9g.png)
