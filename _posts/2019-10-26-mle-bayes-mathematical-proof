@@ -1,0 +1,12 @@
+---
+title: "최대 우도 추정과 베이즈 정리의 간단한 수학적 증명"
+date: 2019-10-26 16:17:28 -0400
+categories: Machine_Learning
+---
+
+## Intro ##
+[이 포스트](https://zzaebok.github.io/machine_learning/bayesian-statistics-and-machine-learning/) 를 통해 베이즈 정리와 머신러닝 사이의 연관성에 대해서 살펴봤다.
+그러나 자세한 수학적인 증명이 없기 때문에 받아들이기 힘든 부분이 있어 간단한 예제와 함께 수학적인 증명을 통하여 어떻게 parameters를 찾는 것인지 알아보고자 한다.
+
+## 최대 우도 추정 ##
+최대 우도 추정(Maximum Likelihood Estimation, MLE)은 모수(parameters)를 찾는 데 우도가 가장 큰 지점을 선택한다는 것이다.
