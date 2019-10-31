@@ -110,6 +110,7 @@ author:
   name             : "zzaebok"
   avatar           : "/assets/images/KakaoTalk_20190906_232921668.png"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Life is **short**."
+  home             : "https://zzaebok.github.io" 
   location         : "Seoul, Korea"
   email            :
   links:
