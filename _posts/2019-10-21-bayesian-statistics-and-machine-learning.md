@@ -26,12 +26,15 @@ categories: Machine_Learning
 
 위 사례에서 우리는 암에 걸리는 것을 H (hypothesis), 양성 반응이 나온 것을 E (event)라고 부르겠다. 이 때 내가 구하려는 확률은 좌변과 같고
 이는 베이즈 정리를 이용하여 우변과 같이 쓸 수 있다.
+
 ![bayes_ex1](https://miro.medium.com/max/827/1*4_dSOG3F5qmjOFTGzA829Q.png)
 
 그런데 우변의 분모는 양성 반응이 나올 확률이고 이는 문제를 통해 알 수 없다. 그러나 마찬가지로 조건부확률을 이용하면 이를 다시 쓸 수 있다.
+
 ![bayes_ex1_denom](https://miro.medium.com/max/1205/1*uh-9cBH-qsU9z9WS6eK2kw.png)
 
 그러면 우리가 구하고자 하는 확률 P(H|E)는 문제에서 제시된 P(H,E), P(H), P(E|H), P(E|~H) 들을 이용하여 구할 수 있게 되고 이를 계산하면 다음과 같다.
+
 ![bayes_ex1_res](https://miro.medium.com/max/1847/1*wG9EG9D2Vr-gnpbcL-BJ2Q.png)
 
 이를 계산하면 몇 퍼센트의 확률이 나올까? 바로 9%이다. 엄청나게 낮은 확률이다. 처음에 문제를 읽고 한 90%는 넘지 않을까? 생각했던 값과
@@ -50,6 +53,7 @@ categories: Machine_Learning
 
 위와 같이 베이즈 통계의 핵심은 우리의 데이터와 evidence가 많아지면 많아질수록 우리의 지식이 '업데이트'되고 '향상'되는 데에 있다.
 드디어 베이즈 통계를 공부하며 항상 들었던 'posterior를 이용해 prior를 업데이트한다'가 무슨 뜻인지 이해하게 되었다.
+
 ![prior and posterior](https://luminousmen.com/media/data-science-bayes-theorem-2.jpg)
 
 맨 처음 prior는 암에 걸릴 확률이라고 알고 있던 0.1%였다. 그러나 양성 반응이라는 이벤트 이후에 사후 확률을 9%로 얻게 되었고, 다시 테스트를 할 때에는
@@ -59,6 +63,7 @@ prior가 0.1%가 아닌 9%를 사용하게 되고(양성이 나왔다는 사실�
 그렇다면 이 베이즈 정리와 머신 러닝은 어떠한 문맥에서 공통점을 공유할 수 있을까?
 머신 러닝을 대분류로 분류해보면 크게 regression과 classification으로 나타낼 수 있다.
 먼저 Regression 문제를 살펴보자. 가장 기본적인 Linear regression을 보면 독립변수와 종속변수의 관계에 대해 추론하는 것이라고 할 수 있다.
+
 ![linear regression](https://miro.medium.com/max/1182/1*4Y-w0Em_qLcIdIxKBDDnkQ.png)
 
 이러한 식을 통해 만든 추정치 $$\hat{y}$$와 실제 $$y$$의 차이 (Loss)를 최소화 하는 것이 이 regression의 목표이다.
@@ -66,16 +71,20 @@ prior가 0.1%가 아닌 9%를 사용하게 되고(양성이 나왔다는 사실�
 그런데 조금 시선을 바꿔서 우리가 추정하고자 하는 $$\theta_0$$과 $$\theta_1$$이 하나의 특정한 값을 갖는 것이 아니라
 분포를 갖는다고 생각해보자.
 그렇게 하면 우리는 머신 러닝이 parameter를 찾는 과정을 베이즈 정리를 이용해서 표현할 수 있게 되는데 다음과 같다.
+
 ![machine learning bayes](https://miro.medium.com/max/480/1*gdgddVSaJQ_BXWJJNYtZ9g.png)
 
 즉, 우리는 P(model)이라는 prior를 알고 있는데 새로운 data가 관측이 되면 posterior(P(model|data))를 얻고 이를
 다음번 학습의 prior로 사용하면서 점진적으로 P(model), 즉 parameter들의 분포를 찾아가는 과정이 머신러닝 과정인 것이다.
+
 ![MAP](https://miro.medium.com/max/486/1*KmnRZ_zc_cD7CIWylEyrFg.png)
 
 Classification에서도 regression과 다를 바가 하나도 없다.
+
 ![machine learning bayes classification](https://miro.medium.com/max/502/1*c63H7VlsTrcntMc5P2v7aw.png)
 
 이렇게 Prior를 업데이트 하는 것이 뭐가 중요하냐라고 생각할 수 있지만,
+
 ![male vs female](https://miro.medium.com/max/884/1*okTibKIXXCSLC3ZuKqKwPQ.png)
 
 위 그림과 같이 어떤 classifier가 prior를 고려하는 지 안하는지의 유무에 따라 분류기 성능이 크게 갈릴 수 있다.
