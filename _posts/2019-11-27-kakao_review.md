@@ -1,7 +1,7 @@
 ---
 title: "2020 카카오 신입 개발자 블라인드 채용 후기"
 date: 2019-11-27 14:12:28 -0400
-categories: Interview, Review
+categories: Interview Review
 ---
 
 ## 서론 ##
