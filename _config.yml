@@ -291,6 +291,8 @@ defaults:
       comments: true
       share: true
       related: true
+      toc_ads: true
+      toc_sticky: true
   - scope:
       path: "_pages"
       type: pages
