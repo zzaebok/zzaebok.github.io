@@ -152,6 +152,10 @@ for epoch in range(epochs):
 
         itr+=1
 ```
+학습을 진행하면 다음과 같은 학습 진행과정을 얻을 수 있다.
+
+![training](https://i.imgur.com/RtSNtsN.png)
+
 학습과정이 끝나면, testset을 이용하여 Accuracy를 체크해볼 수 있다.
 
 ```python
@@ -182,6 +186,15 @@ for text, label in eval_loader:
 print('Test accuracy: ', total_correct / total_len)
  
 ```
+Test 데이터에 대해 검증해본 결과는 다음과 같다.
+
+![test](https://i.imgur.com/yN6VnVu.png)
+
+tokenizer도 따로 만들지 않고, 데이터에 어떠한 전처리도 하지 않은 채로 약 82%의 정확도를 얻을 수 있었다.
+실로 대단한 결과가 아닐 수 없다.
+tokenizer, vocab 구축부터 시작한다면 더 좋은 결과를 얻을 수 있을거라고 생각된다.
+
+모든 코드를 올린 것이지만 출력물도 함께 보고싶다면 [이곳](https://github.com/zzaebok/PytorchBertExample/blob/master/BertForSequenceClassification_%EC%98%88%EC%A0%9C.ipynb)을 방문하여 확인하길 바란다.
 
 ## 결론 ##
 처음에 생각보다 당황했었다.
