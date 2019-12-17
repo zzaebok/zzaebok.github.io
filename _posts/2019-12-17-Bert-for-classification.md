@@ -1,5 +1,5 @@
 ---
-title: "Bert를 이용한 Classification 예제"
+title: "BERT를 이용한 Classification 예제"
 date: 2019-12-17 15:23:28 -0400
 categories: Deep_Learning NLP
 ---
