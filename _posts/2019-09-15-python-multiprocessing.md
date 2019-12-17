@@ -22,7 +22,7 @@ Process는 각 프로세스별로 할당량을 명시적으로 정해준 뒤 일
 
 ### Pool 예시 ###
 [출처](https://m.blog.naver.com/townpharm/220951524843)
-```
+```python
 from multiprocessing import Pool
 import time
 import os
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 말그대로 f(0), f(1), ... f(9)를 땅바닥에 뿌려놓고 Pool에 올라가 있는 세 녀석들이 알아서 하나씩 주워 처리하는 방식이다.
 
 ### Process 예시 ###
-```
+```python
 import os
 
 from multiprocessing import Process
@@ -78,7 +78,7 @@ Pool과는 다르게, 하나의 Process가 각자 target함수와 args를 가지
 **프로세스 간의 통신은 Pipe로 할 수 있다. 그러나 나는 아직 그 기능이 필요하지 않기 때문에 결과를 sharing 하는 정도에서만 포스팅하겠다 **
 
 ### Queue 예시 ###
-```
+```python
 from multiprocessing import Process, Queue
  
 sentinel = -1
@@ -129,7 +129,7 @@ if __name__ == '__main__':
 지원되고 위에서 배운 Queue()보다는 느리다고 하지만 내 생각에 쓰기 편하고 직관적이라 좋은 것 같다. 이 Manager와 [이 포스트](https://beomi.github.io/2017/07/05/HowToMakeWebCrawler-with-Multiprocess/)
 를 활용하여 원하는 List에 함수 결과값을 담아오는 코드를 작성하면 다음과 같다.
 
-```
+```python
 import multiprocessing
 import time
 import requests
