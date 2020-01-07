@@ -19,8 +19,8 @@ search: true
   - Deep learning on battery SoC estimation with Pytorch
   
 ### Education ###
-- Yonsei university (2014 - expected 2020)
-  - GPA: 4.28 / 4.5
+- Yonsei university (2014 - 2020)
+  - GPA: 4.21 / 4.5
   - Majors: Economics, Computer science
 - Nanyang technological university (2018)
   - Computer science class, as an exchange student
