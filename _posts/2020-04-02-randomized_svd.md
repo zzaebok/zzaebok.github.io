@@ -9,7 +9,13 @@ https://gregorygundersen.com/blog/2019/01/17/randomized-svd/
 sklearn n_iter
 
 ## Intro ##
-작성중
+[잠재 의미 분석](https://wikidocs.net/24949)을 사용해 각 document들을 embedding 시키는 작업을 한 적이 있었습니다.
+잠재의미분석(LSA)는 Truncated SVD를 이용하여 구현할 수 있었기 때문에, 자연스레 sklearn 패키지의 [함수](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html)를 사용했습니다.
+사용하던 중에 함수에서 'n_iter' 라는 argument를 발견하였습니다.
+생각해보면 SVD 과정에서 iteration이 없는데 저런 이름의 인자가 있다는 것이 신기해서 살펴보기로 하였습니다.
+sklearn 의 TruncatedSVD 함수는 randomized SVD 방식을 이용하고 있었습니다.
+따라서 저도 공부한 내용을 정리하여 보고자 합니다.
+
 
 ## 순서 ##
 1. X = USVt 를 구하고 싶다. (단, 이 X는 dominant한 smaller rank를 가지고 있다는 가정)
@@ -25,5 +31,6 @@ sklearn n_iter
 11. 이를 해결하기 위해서는 두 가지 해결책이 있다.
 12. 첫 번째는 oversampling으로서, 단지 r + s 로 만드는 방법 ( r = 5~10 )
 13. 그리고 두번째는 power iteration의 방법이 있다.
-14. 그러나 power iteration을 하면 (X*X^T)^q*X 의 SVD결과를 반환하게 된다.
-15. 이를 해결하기위해 iteration마다 QR decomposition / LU decomposition 으로 normalize를 해준다 (?)
+14. Range(A) = Range(AATA) 이므로, singular valu를 빠르게 decay시켜 dominant singular value와 관련된 information을 뽑을 수 있다.
+15. 단, 이 iteration 과정에서 round-off error가 발생한다고 한다. 따라서 매 iteration마다 orthonormalize를 해준다.
+16. 이 방법으로는 QR decomposition을 쓰거나 pivoted LU decomposition을 쓴다.
