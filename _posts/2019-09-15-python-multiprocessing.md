@@ -177,3 +177,7 @@ multiprocessing.Queue()와 multiprocessing.Manager.Queue()의 차이는 [다음]
 ## Conclusion ##
 사실 파이토치 데이터 전처리를 하면서 언젠가 multiprocessing을 공부해야겠다 싶었는데 이번에 정리해본다.
 포인트는 뿌려놓고 사용하려면 Pool, 일일이 지정시키려면 Process, 공유메모리를 쓰려면 Queue(), 다귀찮고 파이썬방식으로 하고 싶다 하면 Manager()를 사용하는 것이 되겠다.
+
+----
+
+*2020-05-21: python에는 built-in 으로 된 concurrent.futures 라이브러리가 있다. 이 라이브러리는 high-level이기 때문에, 이해하기가 쉽고 사용이 편리하다. 따라서 병렬처리를 하고자한다면 이 라이브러리를 먼저 이용하고 그 다음에 low-level로 위의 방법들을 사용하면 좋을 것이다. 위의 예시들을 비슷하게 사용하려면, ProcessPoolExecutor와 map을 사용하여 받은 result list를 parsing해서 사용하면 될 것 같다.
