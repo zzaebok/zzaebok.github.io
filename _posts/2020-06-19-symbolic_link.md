@@ -30,17 +30,17 @@ inode는 리눅스에서 파일, 디렉토리 등 파일시스템에 관한 정�
 심볼릭 링크는 아래의 명령어로 생성할 수 있다.
 
 ```shell
-$ln -s
+$ ln -s
 ```
 만일 ~/tmp/aaa.txt 파일을 바라보는 동일한 내용의 심볼릭 링크 bbb.txt를 만들고 싶다면,
 ```shell
 #~/tmp/
-$ln -s aaa.txt bbb.txt
+$ ln -s aaa.txt bbb.txt
 ```
 cat 명령어를 사용하면 두 파일의 내용이 완전히 동일한 것을 살펴볼 수 있다.
 또한 어떤 파일의 symbolic link 인지는
 ```shell
-$ls -li
+$ ls -li
 ```
 명령어를 통해 확인할 수 있다.
 
@@ -48,7 +48,7 @@ $ls -li
 왜냐하면 심볼릭링크 파일(bbb.txt)를 현재 디렉토리 외의 다른 곳으로 옮기게 되면 심볼릭 링크가 끊겨버리기 때문이다.
 따라서 Local에서 작업할 때라면 절대경로를 기입함으로써 문제를 해결할 수 있다.
 ```shell
-$ln -s /home/user/tmp/aaa.txt bbb.txt
+$ ln -s /home/user/tmp/aaa.txt bbb.txt
 ```
 하지만 위와같이 절대경로를 입력하면 안되는 경우가 있는데 바로 git repo에서 작업할 때이다.
 당연히 /home/user 경로는 나에게만 존재하는 경로이기 때문에 실제 git 작업을 할 때에는 상대경로로 지정해주는 것이 좋다.
@@ -66,7 +66,7 @@ $ln -s /home/user/tmp/aaa.txt bbb.txt
 하드링크를 만드는 방법은 심볼릭 링크에서 -s 옵션을 빼주기만 하면 된다.
 ```shell
 #~/tmp/
-$ln aaa.txt bbb.txt
+$ ln aaa.txt bbb.txt
 ```
 
 ## Conclusion ##
