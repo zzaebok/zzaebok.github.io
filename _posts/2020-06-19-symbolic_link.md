@@ -23,22 +23,23 @@ inode는 리눅스에서 파일, 디렉토리 등 파일시스템에 관한 정�
 파일시스템 내의 파일들은 고유한 inode를 가지며 이를 통해 식별할 수 있다.
 
 심볼릭 링크로 생성된 파일의 inode는 실제 파일의 inode를 가리키게 되고 이를 그림으로 표현하면 아래와 같다.
+
 ![soft_link](https://i2.wp.com/www.geekride.com/wp-content/uploads/soft_link.png?w=384)
 
 즉, symbolic link의 inode는 실제 파일(original file)의 inode를 바라보는 것이다.
 심볼릭 링크는 아래의 명령어로 생성할 수 있다.
 
-```bash
+```shell
 $ln -s
 ```
 만일 ~/tmp/aaa.txt 파일을 바라보는 동일한 내용의 심볼릭 링크 bbb.txt를 만들고 싶다면,
-```bash
+```shell
 #~/tmp/
 $ln -s aaa.txt bbb.txt
 ```
 cat 명령어를 사용하면 두 파일의 내용이 완전히 동일한 것을 살펴볼 수 있다.
 또한 어떤 파일의 symbolic link 인지는
-```bash
+```shell
 $ls -li
 ```
 명령어를 통해 확인할 수 있다.
@@ -46,7 +47,7 @@ $ls -li
 단, 주의할 점은 심볼릭 링크를 걸 때 original file의 경로를 기입해주는 것이 좋다는 것이다.
 왜냐하면 심볼릭링크 파일(bbb.txt)를 현재 디렉토리 외의 다른 곳으로 옮기게 되면 심볼릭 링크가 끊겨버리기 때문이다.
 따라서 Local에서 작업할 때라면 절대경로를 기입함으로써 문제를 해결할 수 있다.
-```bash
+```shell
 $ln -s /home/user/tmp/aaa.txt bbb.txt
 ```
 하지만 위와같이 절대경로를 입력하면 안되는 경우가 있는데 바로 git repo에서 작업할 때이다.
@@ -57,12 +58,13 @@ $ln -s /home/user/tmp/aaa.txt bbb.txt
 심볼릭링크 (혹은 소프트링크)와 다른 개념을 가진 하드링크라는 것도 존재한다.
 하드링크는 심볼릭 링크와 달리 하드링크의 inode가 원본의 inode를 똑같이 가리키게 된다.
 아래 그림을 보면 확실히 두 차이를 느낄 수 있다.
+
 ![hard_link](https://i1.wp.com/www.geekride.com/wp-content/uploads/hard_link.png?w=384)
 
 하드링크로 만들게 되면 해당 inode는 count값을 가지게 되고 자신을 통한 파일들의 갯수를 세고 있다.
 이 역시 ls -li 명령어로 확인해볼 수 있다.
 하드링크를 만드는 방법은 심볼릭 링크에서 -s 옵션을 빼주기만 하면 된다.
-```bash
+```shell
 #~/tmp/
 $ln aaa.txt bbb.txt
 ```
