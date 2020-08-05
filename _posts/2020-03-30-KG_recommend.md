@@ -5,6 +5,7 @@ categories: knowledge_graph recommender_system
 ---
 
 ## Intro ##
+
 GNN, GCN 등 그래프를 활용한 뉴럴 네트워크의 발전과 함께 지식그래프(Knowledge graph)를 이용하는 분야가 확장되고 있습니다.
 그 분야 중 한 분야가 바로 추천시스템(Recommender system) 입니다.
 추천시스템은 현대 인터넷이 직면한 문제인 '정보의 홍수'를 해결하기 위해 발달했습니다.
@@ -50,9 +51,37 @@ CF-based는 오로직 user-item만을, Content-based는 item-attr만을 보고 �
 이처럼 지식그래프를 이용한 추천은 < 유저 - 유저가 Interact한 아이템 - Interact한 아이템의 특성 - 해당 특성을 공유하는 새로운 아이템 > 의 흐름으로 이루어지게 됩니다.
 
 하지만, 지식그래프를 이용한 추천시스템에는 세 가지의 종류가 있습니다.
-각각 그래프 임베딩을 이용한 방법, Path를 이용한 방법, GNN을 이용한 방법입니다.
+각각 지식그래프 임베딩을 이용한 방법, Path를 이용한 방법, GNN을 이용한 방법입니다.
 이들에 대해서는 하나 하나 차근차근 살펴보도록 하겠습니다.
 
-## 
+## Embedding based method ##
 
-## 목차 ##
+지식그래프 임베딩(knowledge graph embedding)은 지식그래프 내의 entity와 relation을 표현하는 representation learning입니다.
+word2vec이 문서 내의 단어들을 벡터화한 것과 같이 지식그래프의 각 element들을 벡터로 표현하는 방법이라고 생각하시면 됩니다.
+지식그래프 임베딩에는 굉장히 여러 가지 방법들이 있지만 그 중 가장 간단한 방법 TransE를 소개해드리겠습니다.
+
+<img src="https://www.researchgate.net/profile/Junyan_Qian/publication/320220365/figure/fig1/AS:566530552995840@1512082817303/Simple-illustration-of-TransE.png" width="300"/>
+
+이전에 지식그래프는 triple로 표현된다고 말했습니다.
+이는 주-술-목, 혹은 head-relation-tail 이라고 불립니다.
+그림에서 h,r,t는 각각 head(entity, node)-relation(edge)-tail(entity, node)를 의미합니다.
+즉, TransE는 각각의 element들이 벡터공간 상에서 h+r=t를 만족할 수 있도록 학습이 진행됩니다.
+이렇게 학습이 되는 벡터들은 지식그래프(KG) 내부의 의미정보들을 잘 담을 수 있게 됩니다.
+예컨대, head와 relation이 주어지면 tail에 올 entity를 알 수 있거나, head와 tail이 주어지면 두 entity 사이의 relation을 예측하는 데에 사용될 수 있습니다.
+
+실제로 지식그래프를 임베딩하는 방식은 굉장히 많습니다.
+하지만 본질은 그래프 내부의 구조를 굉장히 잘 학습할 수 있다는 데에 있습니다.
+이것이 추천시스템에 오게되면 굉장히 중요한 의미를 가지게 됩니다.
+Item과 Attributes들을 이용하여 지식그래프를 만들고, 이를 지식그래프 임베딩을 통하여 학습을 하게되면 Item에 대한 comprehensive representation을 학습할 수 있게 됩니다.
+예를 들어 영화 '기생충'이라는 Item entity를 표현하는 벡터를 만들 때는 '감독'(relation)이 '봉준호'(entity)라는 것과, '배우'(relation)에 '박소담'(entity)이 나온다는 것도 포함되기 때문입니다.
+이처럼 side information을 포함한, 즉 Content-based의 장점을 살리는 Item vector를 만들 수 있게 되는 것이죠.
+
+이렇게 표현력이 풍부한 Item에 대한 vector를 만들게 되면 해당 vector와 User vector를 이용하여 score function을 계산할 수 있습니다.
+예컨대 U vector와 V vector의 inner product $$ yˆi,j = f(ui, vj) $$ 가 될 수 있겠습니다.
+그리고 실제 관찰된 interaction data(positive / negative)에 대해 Gradient Descent 방식으로 학습을 할 수 있게 될 것입니다.
+단 User vector의 경우 User-Item interaction matrix에 대해 MF 방식을 적용하여 구할 수도 있고, User가 interact했던 item vector들을 잘 조합하여 만들 수도 있을 것입니다.
+어찌되었든 본질은 'Embedding 기법을 이용하여 그래프 구조와 의미들을 반영한 Vector를 만들고 Vector들간의 연산을 통해 interaction (1/0)을 예측한다' 입니다.
+
+## Path based method ##
+
+## GNN based method ##
