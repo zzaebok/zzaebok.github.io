@@ -77,7 +77,7 @@ Item과 Attributes들을 이용하여 지식그래프를 만들고, 이를 지�
 이처럼 side information을 포함한, 즉 Content-based의 장점을 살리는 Item vector를 만들 수 있게 되는 것이죠.
 
 이렇게 표현력이 풍부한 Item에 대한 vector를 만들게 되면 해당 vector와 User vector를 이용하여 score function을 계산할 수 있습니다.
-예컨대 U vector와 V vector의 inner product $$ yˆi,j = f(ui, vj) $$ 가 될 수 있겠습니다.
+예컨대 U vector와 V vector의 inner product $$ \hat{y}_{i,j} = f(u_{i}, v_{j}) $$ 가 될 수 있겠습니다.
 그리고 실제 관찰된 interaction data(positive / negative)에 대해 Gradient Descent 방식으로 학습을 할 수 있게 될 것입니다.
 단 User vector의 경우 User-Item interaction matrix에 대해 MF 방식을 적용하여 구할 수도 있고, User가 interact했던 item vector들을 잘 조합하여 만들 수도 있을 것입니다.
 어찌되었든 본질은 'Embedding 기법을 이용하여 그래프 구조와 의미들을 반영한 Vector를 만들고 Vector들간의 연산을 통해 interaction (1/0)을 예측한다' 입니다.
