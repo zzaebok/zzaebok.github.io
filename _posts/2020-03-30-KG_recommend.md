@@ -50,7 +50,7 @@ CF-based는 오로직 user-item만을, Content-based는 item-attr만을 보고 �
 그리고 맨 오른쪽에는 해당 특성들과 유저가 아직 보지 않은 영화(추천가능한 영화)들이 있습니다.
 이처럼 지식그래프를 이용한 추천은 < 유저 - 유저가 Interact한 아이템 - Interact한 아이템의 특성 - 해당 특성을 공유하는 새로운 아이템 > 의 흐름으로 이루어지게 됩니다.
 
-하지만, 지식그래프를 이용한 추천시스템에는 세 가지의 종류가 있습니다.
+지식그래프를 이용한 추천시스템에는 세 가지의 종류가 있습니다.
 각각 지식그래프 임베딩을 이용한 방법, Path를 이용한 방법, GNN을 이용한 방법입니다.
 이들에 대해서는 하나 하나 차근차근 살펴보도록 하겠습니다.
 
@@ -84,4 +84,74 @@ Item과 Attributes들을 이용하여 지식그래프를 만들고, 이를 지�
 
 ## Path based method ##
 
+Path based 방법의 경우 굉장히 직관적으로 추천의 경로를 이해할 수 있습니다.
+지식그래프는 entity-relation-entity-relation으로 이루어지는 Path를 가지고 있습니다.
+
+<img src="https://www.researchgate.net/profile/Marek_Woda/publication/225743387/figure/fig7/AS:302693768810503@1449179226760/Example-of-course-knowledge-graph-with-weights-and-learning-path-visualization.png" width="600">
+
+이 Path를 이용하면 추천의 정확도와 설명력을 높일 수 있습니다.
+기본적으로는 두 가지 방식이 주로 사용되었습니다.
+예전에는 Meta-path라는 개념이 도입되어 활용되었습니다.
+이 Meta-path는 주로 entity 간의 similarity 들을 계산하기 위해 사용되었습니다.
+예를 들어보겠습니다.
+
+<img src="https://tech.ebayinc.com/assets/Uploads/Editor/_resampled/ResizedImageWzEyMDAsNTM2XQ/Screen-Shot-2018-12-02-at-11.59.24-PM.png" width="600">
+
+노래에 관한 User-Item graph가 있다고 할 때에 여러 가지 종류의 Meta-path가 존재할 수 있습니다.
+Song-Writer-Song 라던가, Song-Genre-Song 와 같은 형식입니다.
+이런 종류의 여러가지 Meta-path들을 사전에 정의해둔다면 실제로 두 개의 다른 entity 간의 유사함을 구할 수 있겠지요.
+(쉽게 생각해서 Song-Singer-Song 이 많이 겹칠수록 비슷한 노래일 것입니다)
+하지만 위와같이 Meta-path를 이용하면 굉장히 노동집약적인 일이되고 (직접 골라야하므로) '추천'이라는 Task에 직접적으로 반영시킬 수 없다는 단점이 존재합니다.
+그래서 보통은 Regularization term으로 이용한다고들 하나, 최근에는 잘 사용되지 않아서 넘어가고자 합니다.
+
+지금은 어떤 시대입니까?
+바로 딥러닝의 시대 아니겠습니까?
+Path하면 뭡니까, Sequence이죠, Sequence이면 뭡니까 LSTM이 생각나시지 않습니까 :) ??
+당연하게도 KG의 Path를 input으로 하는 뉴럴넷 모델들이 등장하기 시작합니다.
+
+<img src="https://storage.googleapis.com/groundai-web-prod/media/users/user_201784/project_317733/images/x2.png" width="600">
+
+위와같이 knowledge graph 상의 path를 추출하여 LSTM 네트워크의 인풋으로 넣는 것이죠.
+해당 네트워크는 Label(1/0) 을 기준으로 학습이 될거고 이후 prediction 시에는 Path input에 따른 prediction score를 output으로 낼 수 있습니다.
+위와같은 Path based model의 장점은 결과를 제공하기에 용이하다는 것입니다.
+즉 설명이 가능한 추천이라는 큰 장점입니다.
+"당신은 이전에 기생충이라는 영화를 좋아했고, 이 기생충 영화의 감독인 봉준호가 감독인 설국열차도 좋아할 것입니다" 와 같은 직관적인 설명이 가능해지는 것입니다.
+바로 지식그래프의 relation이 반영되기 때문에 가능한 설명입니다.
+(기존 추천 모델은 봉준호라는 entity가 감독인지 출연진인지 구분할 수 없었겠죠)
+
+
 ## GNN based method ##
+
+당연하게도 지식그래프를 이용한 GNN 기반의 추천 모델들도 존재합니다.
+하지만 아직 체계화되어있다는 느낌은 없으며 GCN / GAT 기반의 모델을 활용하고 있습니다.
+Graph Neural Network는 기본적으로 embedding propagation의 원리 하에 작동하게 됩니다.
+
+<img src="https://www.secmem.org/assets/images/gnn/gnn_1.png" width="600">
+
+그림에서 보는 것과 같이 하나의 노드의 representation을 결정하는 데에 주변 노드 + 자기 자신이 기여를 하게 되는 것이지요.
+GNN based 의 방법인 KGCN 모델(https://arxiv.org/abs/1904.12575)을 통해 살펴보겠습니다.
+
+<img src="https://www.programmersought.com/images/470/e3f1243abe52f0dd32225be2c302963e.png" width="600">
+
+<img src="https://raw.githubusercontent.com/hwwang55/KGCN/master/framework.png" width="600">
+
+해당 논문에서서는 Item을 기반으로 지식그래프를 구축합니다.
+그림과 같이 한 아이템(여기서는 영화)의 주변에는 아이템의 특성들이 존재할 수 있습니다.
+즉 위의 예시를 이용하면 Forrest Gump라는 embedding을 계산할 때 주변의 Drama라는 genre, US라는 country, Tom hanks라는 배우와 Robert라는 감독의 embedding이 영향을 줄 수 있다는 것입니다.
+하지만 Forrest Gump 영화에 2단계 attribute인 "Back to the future" 등의 embedding은 영향을 주지 못하는걸까요?
+아닙니다.
+방금 언급한 Embedding propagation은 그래프 내의 모든 entity에 대해서 진행이 되는데 이 진행과정을 2번, 3번 혹은 n번을 진행하게 되면 n hop 멀리 떨어진 entity도 영향을 줄 수 있습니다.
+다시말해, 첫 번째 iteration에서 Drama라는 entity는 Titanic, forrest gump에 영향을 받았을 것이고, 이 새로운 Drama embedding이 두 번째 iteration 때 Forrest gump에 영향을 줍니다.
+즉, 두 번째 iteration이 되면 Forrest gump embedding을 결정하는 데에는 Titanic 이라는 2 hop 떨어진 entity 역시 영향을 주게 되는 것이죠.
+GNN based recommendation model에서는 이 neighbor들의 중요도에 따라서 영향력을 다르게하는 attention mechanism이 반영됩니다.
+즉, Forrest gump embedding 형성에 이웃 중 중요한 녀석들을 더 크게 반영하겠다는 것이지요.
+그리고 Knowledge graph에서는 주로 relation을 기반으로 하여 이 중요도를 결정합니다.
+어떤 영화에는 감독이 중요하고 어떤 영화에는 배우가 중요할 수 있기 때문에 이것이 학습으로 결정된다고 생각하시면 됩니다.
+정말 편리하고 직관적인 해석이 될 수 있습니다.
+
+결론적으로 GNN model의 경우에는 이렇게 embedding propagation 과정을 거쳐 item embedding을 구합니다.
+이후는 Embedding based 방법의 경우와 같이 User embedding / Item embedding을 모두 이용하여 score function에 넣게 되죠.
+그 score function은 inner product가 될 수도, 다른 형식이 될 수도 있지만요 ^^
+어찌되었든 GNN based 방법은 Unified method라는 이름으로도 불릴 수 있습니다.
+Embedding을 이용하지만, 이 Embedding이 결국 path based로 전파되기 때문이죠.
+따라서 두 모델의 장점을 조합했다고도 할 수 있을 것 같습니다.
