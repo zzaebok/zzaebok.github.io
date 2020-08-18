@@ -55,7 +55,7 @@ True positive와 같은 네이밍은  <그게 맞앗냐?> <예측한거> 라고 
 
   F1 score는 Precision과 Recall을 동시에 고려하는 하나의 metric입니다.
   precision score와 recall score의 조화평균으로 구할 수 있습니다.
-  식으로는 $\frac{2*(precision*recall)}{(precision+recall)}$로 쓸 수 있습니다.
+  식으로는 $\frac{2 * (precision *  recall)}{(precision+recall)}$로 쓸 수 있습니다.
 
 - AUC
 
@@ -125,7 +125,7 @@ k개의 추천에 대한 평가지표로서 사용되는 것이죠.
 
 - MRR
 
-  <img src="https://miro.medium.com/max/700/1*3vI82IYrTiN7fX0ht6mscw.png" width="400">
+  <img src="https://miro.medium.com/max/700/1*3vI82IYrTiN7fX0ht6mscw.png" width="500">
   
   MRR은 Mean Reciprocal Rank의 약자입니다.
   Reciprocal rank는 첫 번째로 등장하는 relevant한 아이템이 우리의 추천상 몇 번째에 위치하는지를 나타내는 지표입니다.
@@ -136,15 +136,67 @@ k개의 추천에 대한 평가지표로서 사용되는 것이죠.
   
   위의 예시와는 다르지만 이해를 돕기위한 그림을 가져와보면 아래와 같습니다.
   
-  <img src="https://miro.medium.com/max/643/1*dR24Drmb9J5BLZp8ffjOGA.png" width="400">
+  <img src="https://miro.medium.com/max/643/1*dR24Drmb9J5BLZp8ffjOGA.png" width="500">
   
   하지만 MRR은 추천 상의 몇 개의 relevant아이템이 나오든 첫 번째로 나오는 relevant 아이템만 신경쓴다는 단점을 가지고있습니다.
   사용자는 단 하나의 성공적인 추천을 원하는 것이 아니라 추천 리스트 안에서 이 아이템 저 아이템을 비교해볼 수 있습니다.
 
 - MAP
-
+  
+  <img src="https://miro.medium.com/max/700/1*wh9Hmb1H1tKxUs-pMXBlvw.png" width="500">
+  
   MAP는 Mean Average Precision의 약자입니다.
   Average Precision은 precision@k에서 k를 점점 늘려가며 얻게되는 precision score를 평균낸 것입니다.
-  추천을 
+  추천의 대상들을 ordered list라고 생각하고 첫 번째 추천부터 차례로 내려가며 relevant 아이템이 나올때마다 precision을 구해서 평균내는 것입니다.
+  유저 A의 경우로 살펴보겠습니다.
+  '7광구', '범죄와의 전쟁', '기생충'의 추천리스트에서 7광구는 첫 번째 아이템이지만 relevant하지 않기 때문에 측정하지 않습니다.
+  이후 두 번째(2) 범죄와의 전쟁은 relevant하므로 1/2 (7광구, 범죄와의전쟁 중 범죄와의 전쟁이 relevant), 마지막으로 세 번째(3) 기생충의 경우 역시 relevant하므로 2/3 (7광,범죄,기생 중 범죄,기생)을 더한 뒤 평균인 (1/2 + 2/3) / 2 = 7/12가 average precision이 되는 것입니다.
+  이후 'Mean'이 의미하는 것처럼 모든 사용자에 대해 Average precision을 구해 평균내면 MAP를 구할 수 있게 됩니다.
   
+  마찬가지로 이해를 돕는 그림을 첨부하겠습니다.
+  
+  <img src="https://miro.medium.com/max/700/1*0xdZ-NWJLlf3m4oyjh0K5g.png" width="500">
+  
+  MAP는 여러 가지 relevant한 아이템들을 추천 내에서 상대적인 score로 반영할 수 있다는 큰 장점이 있습니다.
+  하지만 이 metric은 binary rating (1/0)에 최적화되어있습니다.
+  1~5점으로 star를 매기는 rating과 같은 경우에는 적용할 수 없다는 단점이 있습니다.
+ 
 - nDCG
+
+  <img src="https://miro.medium.com/max/700/1*_a_YsiSw6K1whOzTYYq_Ag.png" width="500">
+  
+  여기서 rel_i는 i번째 위치에 추천된 아이템의 relevance score입니다.
+  예를들어 유저 A에게 relevant한 아이템은 '기생충', '범죄와의 전쟁', '아바타', '테넷'이지만 각각 생각하는 선호에는 차이가 있을 수 있습니다.
+  예컨대 기생충은 5점, 범죄와의 전쟁은 3점, 아바타는 4점, 테넷은 5점과 같이 말이지요.
+  이전 MRR과 MAP가 단순히 1,0으로 분리했던것과는 달리 구체적인 rating으로 선호를 표현할 수 있습니다.
+  (물론 비선호 아이템에 대한 score는 0점입니다)
+  
+  nDCG는 normalized Discounted Cumulative Gain의 약자입니다.
+  차근차근 개념을 쌓아가야하는데 먼저 CG(Cumulative Gain)의 개념은 아주 쉽습니다. 
+  relevance score를 그냥 더하는 것입니다. (relevance score라는 말은 편의를 위한 말일 뿐 명확한 용어가 아닙니다)
+  유저 A의 경우 0(7광구) + 3(범죄와의전쟁) + 5(기생충) = 8이 CG의 값이 됩니다.
+  하지만 이렇게 CG를 구하게 되면 Rank-less한 metric과 크게 다르지 않습니다.
+  선호하는 아이템이 어디에 위치하느냐에 따라 이를 조정해주어야하는데 이 때 바로 Discount 개념이 도입됩니다.
+  relevance score를 등장 위치에 따라 조정하는 것입니다.
+  일반적인 DCG는 log2 를 베이스로하여 Discount가 일어나게 됩니다.
+  다시 한 번 유저 A의 경우 DCG를 구하면 0 + 3 / $log_{2}(2+1)$ + 5 / $log_{2}(3+1)$ = 약 4.39가 됩니다.
+  
+  이로써 relevance score의 값과 순위를 모두 반영한 DCG라는 metric을 구할 수 있습니다.
+  하지만 위 metric의 경우 한계점이 있는데 바로 이 k개의 추천 개수가 커지면 커질수록 점수가 높아진다는 것입니다.
+  k에 따라 고무줄처럼 metric 값이 늘었다 줄었다 할 수 있는 치명적인 단점이 있는 것이지요.
+  따라서 이를 normalize (0~1) 하는 과정이 필요하게 됩니다.
+  이 때 사용되는 것이 IDCG (Ideal Discounted Cumulative Gain)인데 이미 주어진 추천의 가장 이상적인 상태를 DCG로 구한 것입니다.
+  예를들어 우리 모델이 유저 A에게 똑같은 아이템을 추천한다고 할 때 이상적인 모습은 어떤 것인가요?
+  바로 '기생충', '범죄와의 전쟁', '7광구'의 순서입니다.
+  왜냐하면 유저 A가 생각하는 선호 순서대로 추천하는 모습이 가장 이상적이기 때문입니다.
+  이 때의 DCG score를 구한 것이 바로 IDCG입니다.
+  식으로는 5 / $log_{2}(1+1)$ + 3 / $log_{2}(2+1)$ + 0 = 6.89가 되겠네요.
+  
+  따라서 식으로 nDCG를 구하게 되면 4.39/6.89인 0.6372를 구할 수 있습니다.
+  0~1의 일정한 범위를 가지며 상대적인 선호도를 고려하는 metric을 구할 수 있게 되었습니다.
+  
+## conclusion ##
+
+이렇게 추천에서 활용 가능한 여러 가지 metric에 대해 알아봤습니다.
+추천 task와 관련된 논문을 보며 추천 리스트에 대한 평가를 한다는 것이 감이 오지 않았는데 정리를 해보니 확실히 도움이 되었습니다.
+제가 혹시 글에 오류나 오탈자를 적어놨으면 알려주시면 감사드리겠습니다!!
