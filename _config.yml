@@ -108,7 +108,7 @@ analytics:
 # Site Author
 author:
   name             : "zzaebok"
-  avatar           : "/assets/images/KakaoTalk_20190906_232921668.png"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/0c99fa50a82ef2932afdd4042b975e5e.jpg"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Studied at Yonsei University,\n Working at Samsung Research"
   home             : "https://zzaebok.github.io" 
   location         : "Seoul, Korea"
