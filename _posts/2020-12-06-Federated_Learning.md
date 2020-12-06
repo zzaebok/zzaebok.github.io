@@ -1,6 +1,6 @@
 ---
 title: "Federated Learning 정리"
-date: 2020-12-06 18:18:28 -0400
+date: 2020-12-06 10:18:28 -0400
 categories: Federated_Learning Machine_Learning
 ---
 
