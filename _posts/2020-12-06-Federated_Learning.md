@@ -150,8 +150,8 @@ Federated learning은 상대적으로 최근에 각광받기 시작한 개념으
 
 다만, 데모를 따라하시면서 여러 가지 잘 안되는 상황이 발생할 수 있는데 주의점을 알려드리자면 아래와 같습니다.
 - Python 3.8 미만 버전과 tensorflow 1.12 이상, tensorflow 2.0 미만 버전을 사용해주세요. (버전 충돌하는 경우가 계속 나오더라구요)
-- 한 번 Part1의 Jupyter notebook을 실행하면 이후 실행시 FL process exsists와 같은 error가 뜰 수 있는데 이 때는 name이나 version을 다르게 하고 (이때 kotlin syft 내에서도 변경) 실행해주시면 됩니다.
-- 안드로이드 에뮬레이터를 이용하실 경우 TrainingTask.kt 파일의 battery check 부분을 false로 바꿔주세요
+- 한 번 Part1의 Jupyter notebook을 실행하면 이후 실행시 FL process exsists와 같은 error가 뜰 수 있는데 이 때는 name이나 version을 다르게 하고 (이때 kotlinsyft TrainingTask.kt 내에서도 변경) 실행해주시면 됩니다. 또는 docker cache를 삭제함으로써도 가능하다고 하네요. (docker system prune -a)
+- 안드로이드 에뮬레이터를 이용하실 경우 SyftConfiguration.kt 파일의 battery check 부분을 false로 바꿔주세요
 
 ## 정리 ##
 
