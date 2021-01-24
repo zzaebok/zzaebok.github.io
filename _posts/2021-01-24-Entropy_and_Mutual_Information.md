@@ -76,17 +76,17 @@ $ I(X; Y) = \sum_{x}\sum_{y}P(X,Y)log\frac{P(X,Y)}{P(X)P(Y)} $
 
 이 수식의 우변을 계속 바꾸어 나가면 mutual information 역시 Entropy로 표현할 수 있습니다.
 
-$ = \sum_{x}\sum_{y}P(X,Y)log\frac{P(X,Y)}{P(X)} - \sum_{x}\sum_{y}P(X,Y)logP(Y) $
+$$ = \sum_{x}\sum_{y}P(X,Y)log\frac{P(X,Y)}{P(X)} - \sum_{x}\sum_{y}P(X,Y)logP(Y) $$
 
-$ = \sum_{x}\sum_{y}P(X)P(Y|X)logP(Y|X) - \sum_{x}\sum_{y}P(X,Y)logP(Y) $
+$$ = \sum_{x}\sum_{y}P(X)P(Y|X)logP(Y|X) - \sum_{x}\sum_{y}P(X,Y)logP(Y) $$
 
-$ = \sum_{x}P(X)\sum_{y}P(Y|X)logP(Y|X) - \sum_{y}(\sum_{x}P(X,Y))logP(Y) $
+$$ = \sum_{x}P(X)\sum_{y}P(Y|X)logP(Y|X) - \sum_{y}(\sum_{x}P(X,Y))logP(Y) $$
 
-$ = \sum_{x}P(X)H(Y|X) - \sum_{y}P(Y)logP(Y) $
+$$ = \sum_{x}P(X)H(Y|X) - \sum_{y}P(Y)logP(Y) $$
 
-$ = -H(Y|X) + H(Y) $
+$$ = -H(Y|X) + H(Y) $$
 
-$ = H(Y) -H(Y|X) $
+$$ = H(Y) -H(Y|X) $$
 
 이를 직관적으로 해석해보자면 다음과 같습니다.
 Entropy를 설명드릴 때 "불확실성"이라는 단어로 설명을 드렸습니다.
