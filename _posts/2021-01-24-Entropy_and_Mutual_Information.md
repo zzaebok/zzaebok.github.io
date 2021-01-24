@@ -44,8 +44,11 @@ Probability에서 Joint probability라는 말이 있듯, Entropy에도 Joint ent
 이 때 joint distribution이 아래와 같이 주어졌다고 가정해보면,
 
 $ P(sunny, hot) = \frac{1}{2} $
+
 $ P(sunny, cool) = \frac{1}{4} $
+
 $ P(rainy, hot) = \frac{1}{4} $
+
 $ P(rainy, cool) = 0 $
 
 주어진 Joint probability를 이용하여 Entropy를 구하기만 하면 Joint entropy를 구한 것이 됩니다.
@@ -74,10 +77,15 @@ $ I(X; Y) = \sum_{x}\sum_{y}P(X,Y)log\frac{P(X,Y)}{P(X)P(Y)} $
 이 수식의 우변을 계속 바꾸어 나가면 mutual information 역시 Entropy로 표현할 수 있습니다.
 
 $ = \sum_{x}\sum_{y}P(X,Y)log\frac{P(X,Y)}{P(X)} - \sum_{x}\sum_{y}P(X,Y)logP(Y) $
+
 $ = \sum_{x}\sum_{y}P(X)P(Y|X)logP(Y|X) - \sum_{x}\sum_{y}P(X,Y)logP(Y) $
+
 $ = \sum_{x}P(X)\sum_{y}P(Y|X)logP(Y|X) - \sum_{y}(\sum_{x}P(X,Y))logP(Y) $
+
 $ = \sum_{x}P(X)H(Y|X) - \sum_{y}P(Y)logP(Y) $
+
 $ = -H(Y|X) + H(Y) $
+
 $ = H(Y) -H(Y|X) $
 
 이를 직관적으로 해석해보자면 다음과 같습니다.
