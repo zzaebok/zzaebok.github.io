@@ -4,6 +4,12 @@ date: 2021-01-24 22:40:28 -0400
 categories: Machine_Learning
 ---
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
+
 ## 서론 ##
 머신러닝을 공부하다 보면 흔하게 볼 수 있는 개념이 Information theory에 관한 것입니다.
 Entropy, Mutual information과 같은 내용들이 나오는데 수식으로만은 이해가 되지 않아 따로 정리를 해보고자 합니다.
