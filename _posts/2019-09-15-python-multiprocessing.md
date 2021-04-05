@@ -15,10 +15,10 @@ Pool과 Process 모두 병렬 처리를 위해 사용되는데 두 방식에는 
 Process는 각 프로세스별로 할당량을 명시적으로 정해준 뒤 일을 맡기는 것이다.
 추가적으로 [Quora](https://www.quora.com/What-is-the-difference-between-Process-vs-Pool-in-the-multiprocessing-Python-library)에서 확인한 process와 pool의 차이점도 있다.
 
-`
-‘Process’ halts the process which is currently under execution and at the same time schedules another process. ‘Pool’ on the other hand waits till the current execution in complete and doesn’t schedule another process until the former is complete which in turn takes up more time for execution.
+
+>‘Process’ halts the process which is currently under execution and at the same time schedules another process. ‘Pool’ on the other hand waits till the current execution in complete and doesn’t schedule another process until the former is complete which in turn takes up more time for execution.
 ‘Process’ allocates all the tasks in the memory whereas ‘Pool’ allocates the memory to only for the executing process. You would rather end up using Pool when there are relatively less number of tasks to be executed in parallel and each task has to be executed only once.
-`
+
 
 ### Pool 예시 ###
 [출처](https://m.blog.naver.com/townpharm/220951524843)
