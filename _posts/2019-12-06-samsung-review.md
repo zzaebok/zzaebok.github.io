@@ -1,8 +1,14 @@
 ---
 title: "2019 삼성전자 공채 후기"
 date: 2019-12-06 14:26:28 -0400
-categories: Interview Review
+categories: interview
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## 서론 ##
 먼저 저는 2019 삼성전자 삼성리서치 S직군의 상반기 인턴 과정을 수료하였고, 하반기에 신입 공채(인턴수료)에 합격하였음을 알려드립니다.
