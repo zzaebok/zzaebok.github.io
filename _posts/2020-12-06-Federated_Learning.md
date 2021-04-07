@@ -1,8 +1,14 @@
 ---
 title: "Federated Learning 정리"
 date: 2020-12-06 10:18:28 -0400
-categories: Federated_Learning Machine_Learning
+categories: machine_learning
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## 서론 ##
 
