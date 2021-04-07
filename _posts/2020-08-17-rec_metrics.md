@@ -1,7 +1,7 @@
 ---
 title: "추천시스템에 사용되는 metrics 정리"
 date: 2020-08-18 18:49:28 -0400
-categories: recommender_system metrics
+categories: recommender_system
 ---
 
 ## Intro ##
