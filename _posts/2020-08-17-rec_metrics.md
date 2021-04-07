@@ -4,6 +4,12 @@ date: 2020-08-18 18:49:28 -0400
 categories: recommender_system
 ---
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
+
 ## Intro ##
 기계학습, 딥러닝 분야에서는 모델의 성능을 측정하는 수많은 metric들이 존재합니다.
 대표적으로는 정확도(accuracy), AUC score 등이 있습니다.
