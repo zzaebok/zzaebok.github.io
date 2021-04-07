@@ -1,8 +1,14 @@
 ---
 title: "지식그래프(Knowledge graph)를 이용한 추천시스템"
 date: 2020-03-30 12:02:28 -0400
-categories: knowledge_graph recommender_system
+categories: recommender_system knowledge_graph
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## Intro ##
 
