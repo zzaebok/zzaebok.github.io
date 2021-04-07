@@ -2,6 +2,7 @@
 title: "2019 네이버 신입 개발자 공채 후기"
 date: 2019-12-02 15:54:28 -0400
 categories: interview
+permalink: /interview/review/naver-review/
 ---
 
 <script type="text/x-mathjax-config">
