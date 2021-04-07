@@ -2,6 +2,7 @@
 title: "Grpc protocol buffer message to JSON 변환"
 date: 2020-11-10 19:18:28 -0400
 categories: backend
+permalink: /grpc/message_to_json/
 ---
 
 <script type="text/x-mathjax-config">
