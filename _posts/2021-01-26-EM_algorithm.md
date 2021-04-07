@@ -1,7 +1,7 @@
 ---
 title: "EM 알고리즘"
 date: 2021-01-26 20:51:28 -0400
-categories: Machine_Learning
+categories: machine_learning
 ---
 
 <script type="text/x-mathjax-config">
