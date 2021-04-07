@@ -1,8 +1,14 @@
 ---
 title: "Python multiprocessing 파이썬 병렬처리"
 date: 2019-09-15 13:38:28 -0400
-categories: Python
+categories: python
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## Intro ##
 파이썬의 병렬 처리 모듈 multiprocessing에 대해 살펴보도록 하겠습니다.
