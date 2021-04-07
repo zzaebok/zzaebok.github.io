@@ -1,8 +1,14 @@
 ---
 title: "BERT를 이용한 Classification 예제"
 date: 2019-12-17 15:23:28 -0400
-categories: Deep_Learning NLP
+categories: machine_learning
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## 서론 ##
 시작은 단순하다.
