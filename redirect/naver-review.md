@@ -1,6 +1,6 @@
 ---
 layout: redirected
 sitemap: false
-permalink: /interview/review/naver-review/
-redirect_to: /interview/naver-review/
+permalink: /interview/naver-review/
+redirect_to: /interview/review/naver-review/
 ---
