@@ -1,7 +1,7 @@
 ---
 title: "지식그래프를 통한 설명력있는 추천"
 date: 2020-04-02 12:32:28 -0400
-categories: recommender_system
+categories: recommender_system knowledge_graph
 ---
 
 <script type="text/x-mathjax-config">
