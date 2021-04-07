@@ -2,6 +2,7 @@
 title: "2019 삼성전자 공채 후기"
 date: 2019-12-06 14:26:28 -0400
 categories: interview
+permalink: /interview/review/samsung-review/
 ---
 
 <script type="text/x-mathjax-config">
