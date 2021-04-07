@@ -2,6 +2,7 @@
 title: "A/B 테스트와 예제"
 date: 2020-09-27 15:23:28 -0400
 categories: recommender_system
+permalink: /ab_test/ab-testing/
 ---
 
 <script type="text/x-mathjax-config">
