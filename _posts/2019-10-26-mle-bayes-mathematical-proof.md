@@ -1,8 +1,14 @@
 ---
 title: "최대 우도 추정과 베이즈 정리의 간단한 수학적 증명"
 date: 2019-10-26 16:17:28 -0400
-categories: Machine_Learning
+categories: machine_learning
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## Intro ##
 [이 포스트](https://zzaebok.github.io/machine_learning/bayesian-statistics-and-machine-learning/) 를 통해 베이즈 정리와 머신러닝 사이의 연관성에 대해서 살펴봤다.
