@@ -1,8 +1,14 @@
 ---
 title: "심볼릭 링크와 하드 링크"
 date: 2020-06-19 19:17:28 -0400
-categories: Linux
+categories: linux
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## 서론 ##
 프로젝트를 진행하다보면, 하나의 파일을 동시에 여러 군데에서 바라봐야할 일이 생기기 마련이다.
