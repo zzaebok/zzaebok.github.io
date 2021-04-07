@@ -1,6 +1,6 @@
 ---
 layout: redirected
 sitemap: false
-permalink: /deep_learning/RAdam/
-redirect_to: /machine_learning/RAdam/
+permalink: /machine_learning/RAdam/
+redirect_to: /deep_learning/RAdam/
 ---
