@@ -1,8 +1,14 @@
 ---
 title: "2019 네이버 신입 개발자 공채 후기"
 date: 2019-12-02 15:54:28 -0400
-categories: Interview Review
+categories: interview
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## 서론 ##
 2019년 채용 과정의 아픈손가락 네이버 개발자 공채 후기를 작성해보고자 한다.
