@@ -1,8 +1,14 @@
 ---
 title: "2020 카카오 신입 개발자 블라인드 채용 후기"
 date: 2019-11-27 14:12:28 -0400
-categories: Interview Review
+categories: interview
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## 서론 ##
 드디어 길고 길었던 2019년 취준 시즌이 끝났다. 2014년 연세대학교 경제학과로 입학하여 이후 개발자를 꿈꾼 나로서는 정말 다사다난한 한 해였다.
