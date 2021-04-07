@@ -1,8 +1,14 @@
 ---
 title: "지식그래프를 통한 설명력있는 추천"
 date: 2020-04-02 12:32:28 -0400
-categories: Paper
+categories: recommender_system
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## Intro ##
 최근들어 기계학습을 이용한 Recommendation이 각광받고 있다.
