@@ -1,8 +1,14 @@
 ---
 title: "A/B 테스트와 예제"
 date: 2020-09-27 15:23:28 -0400
-categories: AB_TEST
+categories: recommender_system
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## 서론 ##
 서비스에서는 새로운 모델, 새로운 디자인이 실제로 효과가 있는 것인지 확인하는 것이 굉장히 중요한 일이다.
