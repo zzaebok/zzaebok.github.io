@@ -1,7 +1,7 @@
 ---
 title: "Entropy와 Mutual Information"
 date: 2021-01-24 22:40:28 -0400
-categories: Machine_Learning
+categories: machine_learning
 ---
 
 <script type="text/x-mathjax-config">
