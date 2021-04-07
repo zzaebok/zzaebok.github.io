@@ -1,8 +1,14 @@
 ---
 title: "베이지안 통계와 머신 러닝"
 date: 2019-10-21 21:12:28 -0400
-categories: Machine_Learning
+categories: machine_learning
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## Intro ##
 학부 인공지능 수업, 컴퓨터 비전 수업의 Generative Model들을 배우면서 prior가 어쩌니, 확률분포에서 샘플링을 하니 마니 하는 이야기를 들은 적이 있다.
