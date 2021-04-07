@@ -2,6 +2,7 @@
 title: "Federated Learning 정리"
 date: 2020-12-06 10:18:28 -0400
 categories: machine_learning
+permalink: /federated_learning/machine_learning/Federated_Learning/
 ---
 
 <script type="text/x-mathjax-config">
