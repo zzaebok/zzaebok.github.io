@@ -1,8 +1,14 @@
 ---
 title: "Factorization Machines - 추천 알고리즘"
 date: 2019-09-10 19:18:28 -0400
-categories: Machine_Learning
+categories: recommender_system
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## Intro ##
 Recommender System의 다양한 알고리즘 중 Factorization machines 알고리즘에 대해 살펴보도록 하겠습니다.
