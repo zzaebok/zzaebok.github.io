@@ -1,8 +1,14 @@
 ---
 title: "Grpc protocol buffer message to JSON 변환"
 date: 2020-11-10 19:18:28 -0400
-categories: grpc
+categories: backend
 ---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    displayAlign: "left"
+});
+</script>
 
 ## 문제 상황 ##
 grpc 프로토콜을 이용한 서비스에서 서비스의 응답은 시간에 따라 변할 수 있다.
