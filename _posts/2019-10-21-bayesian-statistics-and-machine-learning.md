@@ -35,9 +35,7 @@ MathJax.Hub.Config({
 
 ![bayes_ex1_denom](https://miro.medium.com/max/1205/1*uh-9cBH-qsU9z9WS6eK2kw.png)
 
-
-그러면 우리가 구하고자 하는 확률 $P(H|E)$ 는 문제에서 제시된 $P(H,E), P(H), P(E|H), P(E|~H)$ 들을 이용하여 구할 수 있게 되고 이를 계산하면 다음과 같다.
-
+그러면 우리가 구하고자 하는 확률 P(H\|E) 는 문제에서 제시된 P(H,E), P(H), P(E\|H), P(E\|~H) 들을 이용하여 구할 수 있게 되고 이를 계산하면 다음과 같다
 
 ![bayes_ex1_res](https://miro.medium.com/max/1847/1*wG9EG9D2Vr-gnpbcL-BJ2Q.png)
 
