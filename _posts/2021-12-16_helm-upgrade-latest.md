@@ -59,31 +59,6 @@ spec:
 하지만 이보다는 수월한 방법은 바로 "시간"을 이용하는 것이다.
 우리가 배포하는 시간이 정확히 동일한 시간일 수 없으니까 말이다.
 
-{% raw %}
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: example-deployment
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      name: example
-  template:
-    metadata:
-      labels:
-        name: example
-        ################ 여기 #################
-        date: "{{ now | unixEpoch }}"
-        ######################################
-    spec:
-      containers:
-      - name: sample
-        image: sample-image
-        imagePullPolicy: Always
-```
-{% endraw %}
 
 위 yaml파일에서 label에 date를 추가해주었다.
 unixEpoch 은 [유닉스 시간](https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%89%EC%8A%A4_%EC%8B%9C%EA%B0%84) 으로서, 1970년 1월 1일 00:00 (UTC) 부터의 경과 시간을 초로 환산하여 정수로 나타낸 것이라고 한다.
