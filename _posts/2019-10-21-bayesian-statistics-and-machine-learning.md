@@ -35,7 +35,8 @@ MathJax.Hub.Config({
 
 ![bayes_ex1_denom](https://miro.medium.com/max/1205/1*uh-9cBH-qsU9z9WS6eK2kw.png)
 
-그러면 우리가 구하고자 하는 확률 P(H\|E) 는 문제에서 제시된 P(H,E), P(H), P(E\|H), P(E\|~H) 들을 이용하여 구할 수 있게 되고 이를 계산하면 다음과 같다
+그러면 우리가 구하고자 하는 확률 P(H\|E) 는 문제에서 제시된 P(H,E), P(H), P(E\|H), P(E\|~H) 들을 이용하여 구할 수 있게 되고 이를 계산하면 다음과 같다.
+(하지만 여기서 주의해야할 점이 있다. 본문의 저자는 P(E\|H)를 0.99, P(E\|~H)를 0.01로 설정하여 마치 이들의 합이 1이 되어야하는 것처럼 했는데, 실제로는 P(E\|H)와 P(~E\|H)의 합이 1이 되어야한다. 즉, 우연히 두 확률의 합이 1이 되었다고 생각하자. 두 확률의 합은 원래 1이 되는 것이 아니다.)
 
 ![bayes_ex1_res](https://miro.medium.com/max/1847/1*wG9EG9D2Vr-gnpbcL-BJ2Q.png)
 
