@@ -1,7 +1,7 @@
 ---
-title: "Helm upgrade 할 때 latest 이미지가 사용되지 않는 경우 해결법"
-date: 2021-12-16 20:03:28 -0400
-categories: kubernetes
+title: "파이썬 비동기 프로그래밍 asyncio 겉핥기"
+date: 2022-03-26 19:01:28 -0400
+categories: python
 ---
 
 <script type="text/x-mathjax-config">
