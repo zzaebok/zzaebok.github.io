@@ -107,22 +107,22 @@ challenge는 쉽게 말해, 인증기관에서 당신이 DNS name의 주인인�
 
 ```yaml
 apiVersion: cert-manager.io/v1
-   kind: Issuer
-   metadata:
+kind: Issuer
+metadata:
+ name: letsencrypt-production
+spec:
+ acme:
+   # ACME 서버 URL
+   server: https://acme-v02.api.letsencrypt.org/directory
+   # ACMD 등록을 위한 이메일 주소
+   email: user@naver.com
+   # ACME 계정 비밀키를 저장할 Secret 이름
+   privateKeySecretRef:
      name: letsencrypt-production
-   spec:
-     acme:
-       # ACME 서버 URL
-       server: https://acme-v02.api.letsencrypt.org/directory
-       # ACMD 등록을 위한 이메일 주소
-       email: user@naver.com
-       # ACME 계정 비밀키를 저장할 Secret 이름
-       privateKeySecretRef:
-         name: letsencrypt-production
-       solvers:
-       - http01:
-           ingress:
-             class:  nginx
+   solvers:
+   - http01:
+       ingress:
+         class:  nginx
 ```
 
 여기서 ACME 란 Automated Certificate Management Environment를 의미하며, 자동으로 X.509 인증서를 발급할 때 사용하는 프로토콜이다.
