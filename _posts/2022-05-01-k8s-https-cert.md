@@ -74,7 +74,7 @@ HTTPS 프로토콜에서는, 'SSL(TLS) 인증서'라는 것을 서버에서 준�
 
 먼저, `NGINX Ingress Controller`를 배포한다.
 Ingress Controller는 `ingress`라는 쿠버네티스 명세를 이용하여, HTTP(S) 트래픽에 대한 접근을 통제할 수 있다.
-마이크로서비스를 예로, `ingress`에 지정된 path 별로 각 서비스로 트래픽을 라우팅해주는 것이다.
+마이크로서비스를 상황이라면, `ingress`에 지정된 path 에 따라서 각 서비스로 트래픽을 라우팅해주는 것이다.
 예컨대, `example.com/user` 는 유저 서비스 pod로, `example.com/item` 는 아이템 서비스 pod로 트래픽을 라우팅해주는 것이다.
 
 ```sh
@@ -115,7 +115,7 @@ apiVersion: cert-manager.io/v1
        # ACME 서버 URL
        server: https://acme-v02.api.letsencrypt.org/directory
        # ACMD 등록을 위한 이메일 주소
-       email: user@example.com
+       email: user@naver.com
        # ACME 계정 비밀키를 저장할 Secret 이름
        privateKeySecretRef:
          name: letsencrypt-production
@@ -126,11 +126,11 @@ apiVersion: cert-manager.io/v1
 ```
 
 여기서 ACME 란 Automated Certificate Management Environment를 의미하며, 자동으로 X.509 인증서를 발급할 때 사용하는 프로토콜이다.
-해당 `Issuer` 리소스는 우리가 `Let's Encrypt`라는 인증기관의 ACME 서버를 이용해 만들어주는 인증서를 요청할 것이라는 내용을 담고 있다.
+해당 `Issuer` 리소스는 우리가 `Let's Encrypt`라는 인증기관의 ACME 서버를 이용한 인증서를 요청할 것이라는 내용을 담고 있다.
 `email`은 `Let's Encrypt` 계정 등록을 위해 사용되고, 인증서의 만료 등과 관련되어 연락수단이 된다.
 그리고 `privateKeySecretRef`는 그 계정의 비밀키가 저장될 곳이다.
 계정의 비밀키는 위에서 말한 challenge 단계에서 사용되는데, `Let's Encrypt`에서 준 임의의 TOKEN(nonce)을 이 private key를 이용해 서명하여 도메인 아래 특정 url에 올려둔다.
-그러면 `Let's Encrypt`는 해당 url을 통해 그 서명된 TOKEN을 가져가 이번에는 계정의 공개키를 이용하여 우리 계정이 실제로 해당 도메인을 가지고 있는지 확인하게 된다.
+그러면 `Let's Encrypt`는 해당 url을 통해 그 서명된 TOKEN을 가져가 이번에는 계정의 공개키를 이용하여 서명을 확인함으로써, 계정이 실제로 해당 도메인을 가지고 있는지 확인하게 된다.
 이후 우리가 해당 도메인에 SSL(TLS) 인증서 발급을 요청하면, 우리가 주인임을 확인했음으로 인증서 발급을 진행하게 되는 것이다.
 
 마지막으로 SSL(TLS) 연결을 위한 `ingress` 리소스를 배포한다.
@@ -163,7 +163,7 @@ spec:
 ```
 
 `metadata.annotations`를 통해 인증서 issuer를 기록해준다.
-그리서 tls 연결 설정은 `spec.tls`에서 할 수 있는데, 도메인 명과 발급된 certificate 내용이 담길 secret명을 적어주면 된다.
+그리고 tls 연결 설정은 `spec.tls`에서 할 수 있는데, 도메인 명과 발급된 certificate 내용이 담길 secret명을 적어주면 된다.
 
 ## 마무리 ##
 
