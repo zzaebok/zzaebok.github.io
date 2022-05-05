@@ -1,6 +1,6 @@
 ---
 title: "[WIP] 쿠버네티스 Ingress에 HTTPS 연결 적용하기"
-date: 2022-05-01 22:20:28 -0400
+date: 2022-03-24 22:20:28 -0400
 categories: kubernetes
 ---
 
