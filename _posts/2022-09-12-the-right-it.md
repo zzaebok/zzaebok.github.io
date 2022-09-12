@@ -1,6 +1,6 @@
 ---
 title: "THE RIGHT IT, 될놈을 찾아라"
-date: 2022-09-12 09:58:28 -0400
+date: 2022-09-11 09:58:28 -0400
 categories: business
 ---
 
