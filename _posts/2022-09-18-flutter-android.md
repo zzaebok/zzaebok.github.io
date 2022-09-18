@@ -64,7 +64,6 @@ flutter create example -a java
 `lib/main.dart`
 
 {% highlight dart linenos %}
-```dart
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
@@ -137,15 +136,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-```
 {% endhighlight %}
+
+먼저, 플러터에서는 기본 샘플 앱을 수정하여 안드로이드 플랫폼을 호출하기 위한 버튼과 반환되는 메세지를 표시하는 간단한 UI를 만들었다.
+
+- `line 37`: 플러터와 안드로이드간의 플랫폼 채널로 `MethodChannel`을 선언한다. 채널명은 하나의 앱 안에서 유니크해야하기 때문에 prefix로 domain을 사용하고 뒤에 특정 기능을 명시하는 방법이 좋아보인다.
+- `line 43`: 버튼을 눌렀을 때 실행되는 함수이다. 플랫폼채널의 `invokeMethod`를 통해 플랫폼의 native code를 수행하며 어떤 동작을 실행해야할지 명시하기위해 String 값을 인자로 넘겨준다.
 
 ---
 
 `MainActivity.java`
 
 {% highlight java linenos %}
-```java
 package com.example.example;
 
 import android.content.Intent;
@@ -211,15 +213,23 @@ public class MainActivity extends FlutterActivity {
         }
     }
 }
-```
 {% endhighlight %}
+
+플러터에서 `MethodChannel`을 통해 플랫폼 API를 호출했을 경우, 이 API 호출을 담당하는 `MainActivity`의 코드이다.
+이 `MainActivity`는 UI layout이 존재하지 않으며, 실제 UI는 `SecondActivity`에서 관리하고 여기서는 해당 Activity를 호출하는 역할을 담당한다.
+
+- `line 11`: 기본적으로 `MainActivity`는 플러터 엔진과의 연결을 위해 `FlutterActivity`를 상속받는다.
+- `line 13`: `lib/main.dart`에서 정의한 플랫폼 채널의 이름을 동일하게 사용하여야 한다.
+- `line 16`: `MethodChannel`을 이용한 통신의 결과를 전달하기 위한 `MethodChannel.Result` 변수이다.
+- `line 33`: `MethodChannel`을 이용하여 통신하는 부분이다. `line 39`을 보면 알 수 있듯, 플러터에서 플랫폼 채널을 이용해 호출한 String 값을 확인한 뒤에 어떤 행동을 할지 결정하게 된다.
+- `line 22`: UI가 있는 `SecondActivity`를 호출하기 위한 코드이다.
+- `line 54`: `SecondActivity`가 호출되고 결과(이 예제에서는 `EditText`의 값)를 반환할텐데, 이 반환이 일어났을 경우 실행되는 코드이다. `REQUEST_CODE`는 결과가 반환되었을 때 어떤 Activity에서 이 결과가 반환되었는지 구분하기 위해 사용되는 코드이다. 여기서는 `SecondActivity`로부터 String 결과를 받아 `myResult`변수를 통해 Flutter로 반환하게 된다.
 
 ---
 
 `SecondActivity.java`
 
 {% highlight java linenos %}
-```java
 package com.example.example;
 
 import android.content.Intent;
@@ -252,8 +262,9 @@ public class SecondActivity extends AppCompatActivity {
         });
     }
 }
-```
 {% endhighlight %}
+
+아주 간단하게 `EditText`와 `Button` UI가 있고, `Button`이 클릭되면 `EditText`에 있는 값을 읽은 뒤 `line 28`을 통해 결과를 반환한다.
 
 ---
 
@@ -294,6 +305,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
 }
 ```
+
+UI가 있는 새로운 `SecondActivity`를 추가하기 위해 이 dependency를 추가해준다.
 
 ---
 
@@ -345,6 +358,8 @@ dependencies {
     </application>
 </manifest>
 ```
+
+새로운 Activity가 추가되었으니 `AndroidManifest.xml`에 추가해준다. \<\!-- HERE -->로 표시된 부분에서 확인할 수 있다.
 
 ## Reference ##
 
