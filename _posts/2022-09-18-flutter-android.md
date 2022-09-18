@@ -60,7 +60,6 @@ flutter create example -a java
 코드를 살펴보자
 
 ```java
-{ % highlight java linenos % }
 package com.example.example;
 
 import android.content.Intent;
@@ -126,7 +125,6 @@ public class MainActivity extends FlutterActivity {
         }
     }
 }
-{ % endhighlight % }
 ```
 
 ## Reference ##
