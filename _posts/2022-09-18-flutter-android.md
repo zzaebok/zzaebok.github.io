@@ -59,6 +59,7 @@ flutter create example -a java
 실제로 플랫폼 채널은 플러터 `lib/main.dart`와 안드로이드 `MainActivity.java` 사이에 형성이 되고, 위 예제의 화면이 되는 `SecondActivity`가 `MainActivity`에서 호출되는 형태이다.
 코드를 살펴보자
 
+{% highlight java linenos %}
 ```java
 package com.example.example;
 
@@ -126,6 +127,7 @@ public class MainActivity extends FlutterActivity {
     }
 }
 ```
+{% endhighlight %}
 
 ## Reference ##
 
