@@ -28,13 +28,7 @@ Flutter는 안드로이드, IOS, 웹 등 cross platform에서 하나의 코드�
 이번 예제에서는 플랫폼 중 자바로 작성된 안드로이드 플랫폼과의 통신 코드를 작성할 것이다.
 단, 예제인만큼 특별한 기능을 이용하지는 않고 안드로이드 액티비티를 호출하고 해당 안드로이드 액티비티에서 `EditText`내용을 반환하는 내용을 준비하였다.
 
-<img src="https://imgur.com/DG4oJ86.png" width="170">
-
-<img src="https://imgur.com/99OLcc6.png" width="170">
-
-<img src="https://imgur.com/A8IXrv1.png" width="170">
-
-<img src="https://imgur.com/4r6iQkc.png" width="170">
+<img src="https://imgur.com/DG4oJ86.png" width="170"> <img src="https://imgur.com/99OLcc6.png" width="170"> <img src="https://imgur.com/A8IXrv1.png" width="170"> <img src="https://imgur.com/4r6iQkc.png" width="170">
 
 위 예제에서 첫 번째와 마지막 스크린샷은 Flutter앱, 두 번째와 세 번째 스크린샷은 Android Activity의 모습이다.
 순서는
@@ -65,8 +59,8 @@ flutter create example -a java
 실제로 플랫폼 채널은 플러터 `lib/main.dart`와 안드로이드 `MainActivity.java` 사이에 형성이 되고, 위 예제의 화면이 되는 `SecondActivity`가 `MainActivity`에서 호출되는 형태이다.
 코드를 살펴보자
 
-{ % highlight java linenos % }
 ```java
+{ % highlight java linenos % }
 package com.example.example;
 
 import android.content.Intent;
@@ -132,8 +126,8 @@ public class MainActivity extends FlutterActivity {
         }
     }
 }
-```
 { % endhighlight % }
+```
 
 ## Reference ##
 
