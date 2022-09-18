@@ -1,6 +1,6 @@
 ---
 title: "Flutter에서 Android 액티비티를 실행하는 방법"
-date: 2022-09-18 09:58:28 -0400
+date: 2022-09-17 09:58:28 -0400
 categories: flutter
 ---
 
