@@ -360,6 +360,11 @@ UI가 있는 새로운 `SecondActivity`를 추가하기 위해 이 dependency를
 ```
 
 새로운 Activity가 추가되었으니 `AndroidManifest.xml`에 추가해준다. \<\!-- HERE -->로 표시된 부분에서 확인할 수 있다.
+    
+## 결론 ##
+
+이렇게 Flutter 내에서 Android native code 실행을 위한 플랫폼 채널의 사용법을 확인해보았다.
+예제 코드를 전체 확인하고 싶으면 [여기](https://github.com/zzaebok/flutter-android-example)에서 확인해보길 바란다.
 
 ## Reference ##
 
