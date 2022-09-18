@@ -59,6 +59,91 @@ flutter create example -a java
 실제로 플랫폼 채널은 플러터 `lib/main.dart`와 안드로이드 `MainActivity.java` 사이에 형성이 되고, 위 예제의 화면이 되는 `SecondActivity`가 `MainActivity`에서 호출되는 형태이다.
 코드를 살펴보자
 
+---
+
+`lib/main.dart`
+
+{% highlight dart linenos %}
+```dart
+import 'package:flutter/material.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter - Android Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter - Android Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  
+  // MethodChannel
+  static const platform = MethodChannel("com.example.example/message");
+
+  // Message
+  String _message = "Initial message";
+
+  // Invoke Method
+  Future<void> _getMessage() async {
+    String message;
+    try {
+      message = await platform.invokeMethod('getMessageAndroid');
+    } on PlatformException {
+      message = "Failed to get message from Android";
+    }
+
+    setState(() {
+      _message = message;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(_message),
+            ElevatedButton(onPressed: _getMessage, child: const Text("Get message"))
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+{% endhighlight %}
+
+---
+
+`MainActivity.java`
+
 {% highlight java linenos %}
 ```java
 package com.example.example;
@@ -128,6 +213,138 @@ public class MainActivity extends FlutterActivity {
 }
 ```
 {% endhighlight %}
+
+---
+
+`SecondActivity.java`
+
+{% highlight java linenos %}
+```java
+package com.example.example;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SecondActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+
+        EditText editText = findViewById(R.id.editText);
+
+        // Return android-side message
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent data = new Intent();
+                data.setData(Uri.parse(editText.getText().toString()));
+                setResult(RESULT_OK, data);
+                finish();
+            }
+        });
+    }
+}
+```
+{% endhighlight %}
+
+---
+
+`activity_second.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Type Message Here"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Send Message"/>
+
+</LinearLayout>
+```
+
+---
+
+`android/app/build.gradle`
+
+```gradle
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+}
+```
+
+---
+
+`AndroidManifest.xml`
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.example">
+   <application
+        android:label="example"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        
+        <!-- HERE -->
+        <activity android:name=".SecondActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+        <!-- HERE -->
+
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+</manifest>
+```
 
 ## Reference ##
 
