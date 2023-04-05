@@ -12,7 +12,6 @@ MathJax.Hub.Config({
 
 <img src="https://post-phinf.pstatic.net/MjAxODAzMDlfMTAz/MDAxNTIwNTY0NTU4MjE1.VUTZdbQsy99qXgE565b72u-31MVEZyokyaGs_RwJi0Qg.iat9_OTEMCsR9kzE9ognCDta_eIm4rcAFy7KGuVZo0Mg.JPEG/%EB%9F%AC%EB%8B%A4%EC%9D%B4%ED%8A%B8.jpg?type=w1200" width="500">
 
-<출처-조선DB>
 
 ## 러다이트 운동 ##
 
@@ -34,7 +33,9 @@ MathJax.Hub.Config({
 ChatGPT는 2022년 말 OpenAI에서 출시한 대화형 GPT 모델이다.
 GPT모델 자체는 몇 년 더 이전에 나왔지만, 학습 데이터와 모델 사이즈를 하염없이 키워서 만들었다. 그런데 이게 참 물건이다.
 
+
 <img src="https://imgur.com/BDLf12j.png" width="500">
+
 
 기본적인 물음에 대한 응답을 사람처럼 할 뿐만 아니라, 작곡, 작사, 번역, 심지어 코드까지 작성하는 능력이 있다.
 머신러닝 엔지니어로서 예전에는 이런 multi-task 가 가능한 하나의 모델을 만드는 것이 불가능하다고 생각했었다.
@@ -45,7 +46,9 @@ GPT모델 자체는 몇 년 더 이전에 나왔지만, 학습 데이터와 모�
 
 문득 예전에 AI에게 대체되지 않을 직업 리스트 같은 것을 봤던 기억이 난다.
 
+
 <img src="https://image.kmib.co.kr/online_image/2018/0915/201809150401_11130924006455_2.jpg" width="500">
+
 
 예전에는 창의성이 요구되는 화가, 작가, 작곡가 등이 살아남고 회계사, 변호사 등과 같은 직업들이 오히려 대체될 거라는 예측이 많았다.
 하지만 지금은 어떠한가? StableDiffusion이 등장한 뒤 키워드 입력만으로 원하는 그림을 만들어낼 수 있어졌고, ChatGPT는 글로 할 수 있는 것은 거의 인간 수준으로 할 수 있다.
@@ -79,7 +82,9 @@ GPT는 말그대로 '그럴 듯한 말'을 지어내는 모델이다.
 
 2. 자신의 데이터가 함부로 사용되지 않을 권리가 성문화될 것이다. 최근 OpenAI를 비롯한 기업들이 AI모델 상용화에 따라 자신들의 이익을 위해 소스코드 등을 공개하지 않고 있다. 솔직히 마음만 먹으면 몰래 인터넷에 있는 작가들, 화가들의 작품을 마음껏 가져다가 모델 학습에 쓸 수 있다는 것이다. 따라서 소위 '뛰어난' 실력을 가진 사람들이 자신의 데이터에 성문화된 주권을 갖는 시대가 생길 것이라고 생각한다.
 
-<img src="https://www.dogdrip.net/dvs/b/i/17/07/28/78/904/657/134/fa2cb9e4bc7fe404c60172758ec4816d.jpg" width="400">
+
+<img src="https://image.fmkorea.com/files/attach/new/20181219/486616/805857687/1460748861/477f5ea67f313a3153755cd19d39ba14.jpg" width="400">
+
 
 나도 내가 틀렸으면 좋겠다.
 5년 뒤 이 글을 다시 보고는 '에이 별 것도 아닌 거에 쫄았네'라고 말할 수 있으면 좋겠다.
