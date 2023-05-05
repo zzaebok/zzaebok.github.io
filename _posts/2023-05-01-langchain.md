@@ -1,7 +1,7 @@
 ---
 title: "ChatGPT를 넘어, LangChain 정리"
 date: 2023-05-01 13:22:28 -0400
-categories: machine_learning, llm
+categories: machine_learning llm
 ---
 
 <script type="text/x-mathjax-config">
