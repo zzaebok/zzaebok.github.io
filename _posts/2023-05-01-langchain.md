@@ -1,7 +1,7 @@
 ---
 title: "ChatGPT를 넘어, LangChain 정리"
 date: 2023-05-01 13:22:28 -0400
-categories: machine_learning llm
+categories: machine_learning, llm
 ---
 
 <script type="text/x-mathjax-config">
@@ -103,7 +103,7 @@ os.environ["SERPAPI_API_KEY"] = "..."
 
 우선은 LLM과 Search Tool을 활용하기 위해 발급받은 API들을 환경변수로 등록해야한다.
 
-```python
+{% highlight python linenos %}
 from langchain.agents import load_tools
 from langchain.agents import initialize_agent
 from langchain.agents import AgentType
@@ -116,12 +116,14 @@ tools = load_tools(["serpapi", "llm-math"], llm=llm)
 agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
 
 agent.run("드라마 더 글로리 출연진이 누구야?")
-```
+{% endhighlight %}
 
 - `line 6`: OpenAI API를 이용한 LLM 모델을 초기화시켜준다. `temperature`를 0으로 설정함으로써 매번 동일한 대답이 나오도록 설정하였다.
 - `line 8`: 질문에 대해 이용할 수 있는 Tool들을 설정한다. 여기서 설정한 Tool을 모두 사용하는 것은 아니며, LLM 이 스스로 어떤 Tool을 사용할 지 정할 수 있다. 사용할 수 있는 Tool들은 [여기](https://python.langchain.com/en/latest/modules/agents/tools.html)에서 확인할 수 있다.
 - `line 10`: Agent를 초기화한다. 여기서 Agent는 `LangChain` 내부에서 프롬프트 엔지니어링을 하는 객체라고 생각하면 된다. LLM 에게 전달할 Prompt를 Tool을 이용해 풍부하게 하거나, LLM 의 output을 post-processing하여 다시 LLM의 input으로 넣는 등의 행동을 한다. Agent의 종류는 [여기](https://python.langchain.com/en/latest/modules/agents/agents/agent_types.html)서 확인해볼 수 있다.
 - `line 12`: 원하는 질문을 agent에게 던진다.
+
+실행 결과를 보자.
 
 <img src="https://imgur.com/4zEoQip.png" width="600">
 
@@ -138,17 +140,21 @@ Specifically, this json should have a `action` key (with the name of the tool to
 The only values that should be in the "action" field are: {tool_names}
 The $JSON_BLOB should only contain a SINGLE action, do NOT return a list of multiple actions. Here is an example of a valid $JSON_BLOB:
 
-# {{{{
-#   "action": $TOOL_NAME,
-#   "action_input": $INPUT
-# }}}}
+` ``
+{{{{
+  "action": $TOOL_NAME,
+  "action_input": $INPUT
+}}}}
+` ``
 
 ALWAYS use the following format:
 Question: the input question you must answer
 Thought: you should always think about what to do
 Action:
 
-# $JSON_BLOB
+` ``
+$JSON_BLOB
+` ``
 
 Observation: the result of the action
 ... (this Thought/Action/Observation can repeat N times)
@@ -178,6 +184,7 @@ Action Input: "The Glory cast"
 결국 Chaining의 과정이 된 것이다.
 LLM에게 이용할 Tool을 묻고, Tool을 이용한 결과를 다시 프롬프트에 넣고, 그 output을 또 활용하는 과정이다.
 이러한 과정들을 N 번 반복하면서 `Thought` 필드에 정답을 찾았다는 output이 나오는 순간 Agent는 Chaining을 멈추고 정답을 반환하는 것이다.
+우리 예제 같은 경우 Search API를 두 번 Chaining 하여 원하는 결과를 얻게 되었다.
 
 ## Conclusion
 
