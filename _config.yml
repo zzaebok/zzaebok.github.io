@@ -101,7 +101,7 @@ social:
 analytics:
   provider               : "google" # false (default), "google", "google-universal", "custom"
   google:
-    tracking_id          : "UA-194863179-1"
+    tracking_id          : "G-W9REW07LVD"
     anonymize_ip         : # true, false (default)
 
 
