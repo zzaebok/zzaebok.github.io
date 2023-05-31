@@ -40,7 +40,7 @@ HTTPS 프로토콜에서는, 'SSL(TLS) 인증서'라는 것을 서버에서 준�
 클라이언트가 서버에 접속했을 때 서버는 이 인증서를 건내며, "봐봐, 나 신뢰할 수 있는 놈이야"라고 말한다.
 그럼, 클라이언트는 "아! 이녀석은 내가 찾던 녀석이구나!"하고 신뢰할 수 있게 되는 것이다.
 
-<img src="https://www.extremetech.com/wp-content/uploads/2017/01/ssl-works.jpg" width=800>
+<img src="https://imgur.com/PRByWgF.png" width=800>
 
 위 그림을 통해 HTTPS의 동작을 살펴보면,
 1. 유저가 어떤 서버에 접속을 하려고 하면 (예를 들면 주소창에 www.naver.com을 입력),
