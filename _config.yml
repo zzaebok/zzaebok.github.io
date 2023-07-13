@@ -124,7 +124,7 @@ author:
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
     - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin-square"
+      icon: "fab fa-fw fa-linkedin-in"
       url: "https://kr.linkedin.com/in/jaebok-lee-99318815b"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
