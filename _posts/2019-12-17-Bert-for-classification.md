@@ -11,6 +11,11 @@ MathJax.Hub.Config({
 });
 </script>
 
+### 앞서서 ###
+본 글은 2019년 12월에 작성되었는데, 내 생각보다 훨신 많은 분들이 좋아해주셨다.
+아무래도 내가 겪었던 어려움과 불만을 그대로 느끼신 분들이 많았던 것이라고 생각한다.
+하지만 시간이 지남에 따라 huggingface 의 transformers 라이브러리에도 많은 변동이 있었는데, 이를 수정하여 2023년 8월 11일을 기준으로 세부 내용을 가다듬었습니다.
+
 ## 서론 ##
 시작은 단순하다.
 작년 즈음 Bert라는 어마무시한 NLP 모델이 나왔다는 소식을 들었다.
@@ -23,7 +28,7 @@ MathJax.Hub.Config({
 따라서, 이번에 완전히 필요한 간단한 코드들만 이용하여 어떻게 Bert를 이용한 Binary classification을 할 수 있는 지 정리하고자 한다.
 
 현재 SOTA를 갱신하고 있는 NLP 모델들은 거의 transformer network를 기반으로 구축되어있다.
-그리고 Pytorch로 이를 구현한 라이브러리는 Hugging face의 [pytorch-transformers](https://github.com/huggingface/transformers)이다.
+그리고 Pytorch로 이를 구현한 라이브러리는 Hugging face의 [transformers](https://github.com/huggingface/transformers)이다.
 
 ## Transformer and Bert ##
 먼저 이 글은 transformer와 bert에 대해 들어본 적이 있고, 대강 개념은 알고 있으며 예제를 찾고 있는 사람을 위해 쓰인 글이다.
@@ -34,19 +39,22 @@ MathJax.Hub.Config({
 ## 예제 ##
 본격적으로 '그래서 내용은 이해했는데, 어떻게 쓸 수 있냐고'에 대해 써보겠다.
 우선, 나는 [네이버 영화 리뷰 corpus](https://github.com/e9t/nsmc)의 감성 이진분류(긍부정)를 목적으로 예제를 세웠다.
-이 예제는 Google Colab에서 GPU를 활용하여 진행하였다.
+이 예제는 Google Colab에서 GPU를 활용하여 진행하였다. (만일 본인의 GPU 환경이 다르다면, batch_size 등을 잘 조절해보길 바란다)
 
-먼저, pytorch-transformers 라이브러리를 설치하고 필요한 것들을 import 한다.
+먼저, transformers 등 필요한 라이브러리를 설치하고 필요한 것들을 import 한다. (python은 3.8.10 버전을 사용했다.)
 
 ```python
-!pip install pytorch-transformers
+!pip install torch==1.7.1
+!pip install transformers==4.30.2
+!pip install pandas==2.0.3
+!pip install numpy==1.24.3
 ```
 ```python
 import numpy as np
 import pandas as pd
 import torch
 from torch.utils.data import Dataset, DataLoader
-from pytorch_transformers import BertTokenizer, BertForSequenceClassification, BertConfig
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from torch.optim import Adam
 import torch.nn.functional as F
 ```
@@ -91,33 +99,41 @@ Batch size는 2로 하였는데, 4부터는 Colab의 CUDA 메모리가 터지기
 
 ```python
 nsmc_train_dataset = NsmcDataset(train_df)
-train_loader = DataLoader(nsmc_train_dataset, batch_size=2, shuffle=True, num_workers=2)
+train_loader = DataLoader(nsmc_train_dataset, batch_size=2, shuffle=True)
 ```
 이후 과정은 일반적인 LSTM이나 CNN을 사용하는 과정과 동일하다.
 Huggingface에서 구현된 Bert는 pytorch의 module클래스를 상속받고 있다.
 따라서 이미지 분류 classification task처럼 진행해주면 된다.
 
-from_pretrained('bert-base-multilingual-cased')를 사용함으로써 google에서 [pretrained한 모델](https://github.com/google-research/bert/blob/master/multilingual.md)을 사용할 수 있다.
-그리고 bert 소개글에서와 같이 tokenizer는 wordpiece를 만들어 토큰화가 이루어진다.
-여기서 포인트는 우리가 구현체 중 'BertForSequenceClassification'모델을 사용하는 것이다.
-이 모델은 디폴트로 이진분류가 되어있다.
-따라서 multi-label을 하거나 다른 task를 학습하기 위해서는 구현된 다른 서브 모델들을 활용하면 된다.
-예컨대, multi-label을 하고 싶으면 기본 BertModel의 classifier layer를 조정해줘야하는데, [이곳](https://medium.com/huggingface/multi-label-text-classification-using-bert-the-mighty-transformer-69714fa3fb3d)을 참고하면 도움이 될 것이다.
+`from_pretrained('bert-base-multilingual-cased')`를 사용함으로써 google에서 [pretrained한 모델](https://github.com/google-research/bert/blob/master/multilingual.md)을 사용할 수 있다.
+여기서 포인트는 우리가 구현체 중 `AutoModelForSequenceClassification`모델을 사용하는 것이다.
+
+`AutoModelForSequenceClassification` 모델은 Bert 같은 Transformer 모델에 classification head를 붙인 모델로서 디폴트로 분류 문제를 풀 수 있게 되어있다.
+다른 말로 하면 여러 다른 문제들을 위한 head가 붙어있는 모델들을 이용하려면 다른 class를 써야한다. (generation을 위해서는 `AutoModelForSeq2SeqLM`, token classification을 위해서는 `AutoModelForTokenClassification` 등)
+
+이러한 `Auto`로 시작하는 tokenizer, model은 이름을 전달해줌으로써 사전학습된 모델을 huggingfacehub로부터 다운로드 받을 수 있도록 도와준다.
+이 예제에서는 내가 `bert-base-multilingual-cased` 를 선택했지만 꼭 그럴 필요는 없다. (bert일 필요도 없다.)
+
+[Huggingface Hub](https://huggingface.co/models)에 들어가보면 각종 Task 별로 사용할 수 있는 모델들이 분류가 되어있는데,
+
+<img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/hub/tasks.png" width="400">
+
+원하는 Task 를 눌러 다른 사용자들이 올려놓은 모델들을 확인해볼 수 있다.
+긍부정 분류의 경우 `Text Classification`이 될 것이다.
 
 ```python
-device = torch.device("cuda")
-tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
-model = BertForSequenceClassification.from_pretrained('bert-base-multilingual-cased')
+device_name = "cuda" if torch.cuda.is_available() else "cpu"
+device = torch.device(device_name)
+tokenizer = AutoTokenizer.from_pretrained('bert-base-multilingual-cased')
+model = AutoModelForSequenceClassification.from_pretrained('bert-base-multilingual-cased')
 model.to(device)
 ```
 
 트레이닝 과정은 굉장히 심플하다.
 optimizer 설정, 일정 주기별로 Loss 찍기 등 흔히 볼 수 있는 코드로 진행이 가능하다.
-주의해야하는 것은, 학습 샘플의 인풋이 (batch_size, sequence_length)로 들어간다는 것이다.
-따라서 zero-padding을 직접 해줘서 model의 forward에 넣어줘야한다.
 
 ```python
-optimizer = Adam(model.parameters(), lr=1e-6)
+optimizer = Adam(model.parameters(), lr=1e-5)
 
 itr = 1
 p_itr = 500
@@ -132,21 +148,18 @@ for epoch in range(epochs):
     
     for text, label in train_loader:
         optimizer.zero_grad()
-        
-        # encoding and zero padding
-        encoded_list = [tokenizer.encode(t, add_special_tokens=True) for t in text]
-        padded_list =  [e + [0] * (512-len(e)) for e in encoded_list]
-        
-        sample = torch.tensor(padded_list)
-        sample, label = sample.to(device), label.to(device)
-        labels = torch.tensor(label)
-        outputs = model(sample, labels=labels)
-        loss, logits = outputs
 
+        encoded = tokenizer(text, padding=True, truncation=True, max_length=512, return_tensors="pt")
+        encoded, label = encoded.to(device), label.to(device)
+        outputs = model(**encoded, labels=label)
+        
+        loss = outputs.loss
+        logits = outputs.logits
+        
         pred = torch.argmax(F.softmax(logits), dim=1)
-        correct = pred.eq(labels)
+        correct = pred.eq(label)
         total_correct += correct.sum().item()
-        total_len += len(labels)
+        total_len += len(label)
         total_loss += loss.item()
         loss.backward()
         optimizer.step()
@@ -170,28 +183,26 @@ for epoch in range(epochs):
 model.eval()
 
 nsmc_eval_dataset = NsmcDataset(test_df)
-eval_loader = DataLoader(nsmc_eval_dataset, batch_size=2, shuffle=False, num_workers=2)
+eval_loader = DataLoader(nsmc_eval_dataset, batch_size=8, shuffle=False)
 
 total_loss = 0
 total_len = 0
 total_correct = 0
 
 for text, label in eval_loader:
-    encoded_list = [tokenizer.encode(t, add_special_tokens=True) for t in text]
-    padded_list =  [e + [0] * (512-len(e)) for e in encoded_list]
-    sample = torch.tensor(padded_list)
-    sample, label = sample.to(device), label.to(device)
-    labels = torch.tensor(label)
-    outputs = model(sample, labels=labels)
-    _, logits = outputs
+    
+    encoded = tokenizer(text, padding=True, truncation=True, max_length=512, return_tensors="pt")
+    encoded, label = encoded.to(device), label.to(device)
+    outputs = model(**encoded, labels=label)
+    
+    logits = outputs.logits
 
     pred = torch.argmax(F.softmax(logits), dim=1)
-    correct = pred.eq(labels)
+    correct = pred.eq(label)
     total_correct += correct.sum().item()
-    total_len += len(labels)
+    total_len += len(label)
 
 print('Test accuracy: ', total_correct / total_len)
- 
 ```
 Test 데이터에 대해 검증해본 결과는 다음과 같다.
 
@@ -199,7 +210,6 @@ Test 데이터에 대해 검증해본 결과는 다음과 같다.
 
 tokenizer도 따로 만들지 않고, 데이터에 어떠한 전처리도 하지 않은 채로 약 82%의 정확도를 얻을 수 있었다.
 실로 대단한 결과가 아닐 수 없다.
-tokenizer, vocab 구축부터 시작한다면 더 좋은 결과를 얻을 수 있을거라고 생각된다.
 
 모든 코드를 올린 것이지만 출력물도 함께 보고싶다면 [이곳](https://github.com/zzaebok/PytorchBertExample/blob/master/BertForSequenceClassification_%EC%98%88%EC%A0%9C.ipynb)을 방문하여 확인하길 바란다.
 
