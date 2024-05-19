@@ -1,6 +1,6 @@
 ---
-title: "얼렁뚱땅 LLM을 만들어보자 (1/3)"
-date: 2024-05-18 21:21:28 -0400
+title: "얼렁뚱땅 LLM을 만들어보자 [1/3]"
+date: 2024-05-19 21:21:28 -0400
 categories: machine_learning nlp
 ---
 
@@ -10,6 +10,7 @@ MathJax.Hub.Config({
 });
 </script>
 
+
 ## Large Language Model (LLM)
 
 2024년 5월 13일, OpenAI에서 GPT-4o를 발표했다.
@@ -17,7 +18,7 @@ MathJax.Hub.Config({
 오냐오냐 하니까 이녀석이 어디까지...
 
 <p align="center">
-<img src="https://imgur.com/op3PHGg.png" width="600">
+<img src="https://imgur.com/op3PHGg.png" width="700">
 </p>
 
 어쨋든, 더 늦기 전에 LLM을 한 번 학습시켜보고 싶었다.
@@ -45,6 +46,18 @@ LLM, 즉 GPT 스타일의 `Causal` Language Model을 학습하기 위해서는 �
 
 가장 먼저 만들어야하는 것은 Tokenizer이다.
 Tokenizer는 Huggingface 의 [tokenizers](https://github.com/huggingface/tokenizers) 라이브러리를 이용하면 쉽게 만들 수 있다.
+
+Tokenizer의 역할은 크게 아래 과정을 따르게 된다.
+
+- **Normalize**: 소문자화를 시킨다던가, 유니코드상 특이한 문자열을 제거 혹은 합치는 등의 말그대로 정규화 로직이다. 사용 가능한 Normalizer는 [여기](https://huggingface.co/docs/tokenizers/api/normalizers)에서 확인할 수 있다.
+- **Pre-tokenize**: 구두점을 떨어뜨려 준다거나, 스페이스를 기반으로 문자를 split 하는 로직 등이다. 한글로 치면 형태소를 기반으로 tokenize하는 것들이 포함될 수 있다. 결국 Model Tokenizer가 잘 학습되기 위한 기능들이 포함된다.
+- **Model**: 데이터를 기반으로 학습을 해야하는 tokenize 모델. BPE, Wordpiece, Unigram 모델 등이 있다.
+- **Post-process**: 모델에 따라 특별한 후처리를 한다. 예컨대, BERT 같은 모델이 맨 앞에 [CLS], 마지막에 [SEP] 토큰을 붙이는 것과 같은 처리이다.
+- **Decodes**: Pre-tokenize 혹은 Model 방법들 중 일부는 Revert(원상복귀) 되어야한다. 예를 들어 WordPiece 모델의 경우 이어 붙는 Subword에 '##'을 붙이는데, 이것을 지우고 제대로 다시 단어를 붙여 주는 경우다.
+
+<p align="center">
+<img src="https://imgur.com/MO3O42W.png" width="600">
+</p>
 
 {% highlight python linenos %}
 from transformers import PreTrainedTokenizerFast
@@ -95,6 +108,14 @@ if __name__ == "__main__":
     main()
 {% endhighlight %}
 
+나는 이번 얼렁뚱땅 LLM 만들기 프로젝트에서 최대한 간단한 예제들을 이용하고 싶었기 때문에 위 코드를 작성하였다.
+
+- Normalizer는 따로 사용하지 않았다.
+- `line 16-17`: Pre-tokenize는 공백을 기준으로 Split 하는 것, 구두점을 떼어내어 독립적인 토큰으로 사용할 수 있도록 하는 것을 사용하였다.
+- `line 22-27`: BPE 모델을 사용하였고, 이어 붙는 단어에 대해서는 '##'으로 시작하도록 하였다. 이는 "밥먹었니?" 에서는 밥이 "밥"으로, "비빔밥"에서는 밥이 "##밥" 으로 토큰화 되도록 한 것이다.
+- `line 30`: '##'을 잘 지우고 붙여주는 Decodes를 사용하였다.
+
+이렇게하고 `Dataset`에서 준비한 데이터들을 입력으로 넣어주면 학습이 알아서 되게 된다. (참 좋은 세상이다.)
 
 ## References
 - https://arxiv.org/abs/2106.09685
