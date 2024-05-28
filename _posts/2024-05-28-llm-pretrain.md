@@ -1,6 +1,6 @@
 ---
 title: "얼렁뚱땅 LLM을 만들어보자 [2/3]"
-date: 2024-05-27 21:58:28 -0400
+date: 2024-05-27 21:56:28 -0400
 categories: machine_learning nlp
 ---
 
@@ -94,123 +94,132 @@ from transformers import (
     Trainer,
 )
 from datasets import Dataset
+{% endhighlight %}
 
+- 냠냠냠
 
+{% highlight python linenos %}
 def load_txt_to_dataset(file_path: str):
     with open(file_path) as f:
         lines = f.readlines()
     data = {"text": lines}
     dataset = Dataset.from_dict(data)
     return dataset
+{% endhighlight %}
+
+- 냠냠냠
 
 
-def main():
-    # prepare dataset
-    dataset = load_txt_to_dataset("data/pretrain/corpus.txt")
-    dataset = dataset.select(range(100_000_000))
-    dataset = dataset.train_test_split(test_size=0.001, shuffle=True, seed=42)
-    print(dataset)
+{% highlight python linenos %}
+# prepare dataset
+dataset = load_txt_to_dataset("data/pretrain/corpus.txt")
+dataset = dataset.select(range(100_000_000))
+dataset = dataset.train_test_split(test_size=0.001, shuffle=True, seed=42)
+print(dataset)
+{% endhighlight %}
 
-    # tokenize dataset
-    context_length = 512
-    tokenizer = AutoTokenizer.from_pretrained("model/pretrain")
+{% highlight python linenos %}
+# tokenize dataset
+context_length = 512
+tokenizer = AutoTokenizer.from_pretrained("model/pretrain")
 
-    def tokenize(element):
-        """
-        A text which length is over `context_length` is divided into multiple segments
-        """
-        outputs = tokenizer(
-            element["text"],
-            truncation=True,
-            max_length=context_length,
-            return_overflowing_tokens=True,
-            return_length=True,
-        )
-        return outputs
-
-    tokenized_dataset = dataset.map(
-        tokenize,
-        batched=True,
-        remove_columns=dataset["train"].column_names,
+def tokenize(element):
+    """
+    A text which length is over `context_length` is divided into multiple segments
+    """
+    outputs = tokenizer(
+        element["text"],
+        truncation=True,
+        max_length=context_length,
+        return_overflowing_tokens=True,
+        return_length=True,
     )
-    print(tokenized_dataset)
+    return outputs
 
-    # initialize model
-    config = AutoConfig.from_pretrained(
-        "microsoft/phi-1_5",
-        vocab_size=len(tokenizer),
-        max_position_embeddings=context_length,
-        bos_token_id=tokenizer.bos_token_id,
-        eos_token_id=tokenizer.eos_token_id,
-    )
+tokenized_dataset = dataset.map(
+    tokenize,
+    batched=True,
+    remove_columns=dataset["train"].column_names,
+)
+print(tokenized_dataset)
+{% endhighlight %}
 
-    model = PhiForCausalLM(config)
-    model_size = sum(t.numel() for t in model.parameters())
-    print(f"Phi-1_5 size: {model_size/1000**3:.1f}B parameters")
+{% highlight python linenos %}
+# initialize model
+config = AutoConfig.from_pretrained(
+    "microsoft/phi-1_5",
+    vocab_size=len(tokenizer),
+    max_position_embeddings=context_length,
+    bos_token_id=tokenizer.bos_token_id,
+    eos_token_id=tokenizer.eos_token_id,
+)
 
-    # prepare evaluation metric
-    def preprocess_logits_for_metrics(logits, labels):
-        if isinstance(logits, tuple):
-            # Depending on the model and config, logits may contain extra tensors,
-            # like past_key_values, but logits always come first
-            logits = logits[0]
+model = PhiForCausalLM(config)
+model_size = sum(t.numel() for t in model.parameters())
+print(f"Phi-1_5 size: {model_size/1000**3:.1f}B parameters")
+{% endhighlight %}
 
-        return torch.argmax(logits, axis=-1)
+{% highlight python linenos %}
+# prepare evaluation metric
+def preprocess_logits_for_metrics(logits, labels):
+    if isinstance(logits, tuple):
+        # Depending on the model and config, logits may contain extra tensors,
+        # like past_key_values, but logits always come first
+        logits = logits[0]
 
-    metric = evaluate.load("accuracy")
+    return torch.argmax(logits, axis=-1)
 
-    def compute_metrics(eval_preds):
-        preds, labels = eval_preds
-        # preds have the same shape as the labels, after the argmax(-1) has been calculated
-        # by preprocess_logits_for_metrics but we need to shift the labels
-        labels = labels[:, 1:].reshape(-1)
-        preds = preds[:, :-1].reshape(-1)
+metric = evaluate.load("accuracy")
 
-        return metric.compute(predictions=preds, references=labels)
+def compute_metrics(eval_preds):
+    preds, labels = eval_preds
+    # preds have the same shape as the labels, after the argmax(-1) has been calculated
+    # by preprocess_logits_for_metrics but we need to shift the labels
+    labels = labels[:, 1:].reshape(-1)
+    preds = preds[:, :-1].reshape(-1)
 
-    # train
-    tokenizer.pad_token = tokenizer.eos_token
-    data_collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
+    return metric.compute(predictions=preds, references=labels)
+{% endhighlight %}
 
-    args = TrainingArguments(
-        output_dir="model/pretrain/multinode",
-        per_device_train_batch_size=4,
-        per_device_eval_batch_size=4,
-        evaluation_strategy="steps",
-        eval_steps=10_000,
-        logging_steps=10_000,
-        gradient_accumulation_steps=4,
-        num_train_epochs=2,
-        weight_decay=0.1,
-        warmup_steps=10_000,
-        lr_scheduler_type="cosine",
-        learning_rate=5e-4,
-        save_steps=10_000,
-        # fp16=True,
-        bf16=True,
-        save_total_limit=5,
-        load_best_model_at_end=True,
-        metric_for_best_model="eval_accuracy",
-        greater_is_better=True,
-    )
+{% highlight python linenos %}
+# train
+tokenizer.pad_token = tokenizer.eos_token
+data_collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
 
-    trainer = Trainer(
-        model=model,
-        tokenizer=tokenizer,
-        args=args,
-        data_collator=data_collator,
-        train_dataset=tokenized_dataset["train"],
-        eval_dataset=tokenized_dataset["test"],
-        compute_metrics=compute_metrics,
-        preprocess_logits_for_metrics=preprocess_logits_for_metrics,
-    )
+args = TrainingArguments(
+    output_dir="model/pretrain/multinode",
+    per_device_train_batch_size=4,
+    per_device_eval_batch_size=4,
+    evaluation_strategy="steps",
+    eval_steps=10_000,
+    logging_steps=10_000,
+    gradient_accumulation_steps=4,
+    num_train_epochs=2,
+    weight_decay=0.1,
+    warmup_steps=10_000,
+    lr_scheduler_type="cosine",
+    learning_rate=5e-4,
+    save_steps=10_000,
+    # fp16=True,
+    bf16=True,
+    save_total_limit=5,
+    load_best_model_at_end=True,
+    metric_for_best_model="eval_accuracy",
+    greater_is_better=True,
+)
 
-    trainer.train()
+trainer = Trainer(
+    model=model,
+    tokenizer=tokenizer,
+    args=args,
+    data_collator=data_collator,
+    train_dataset=tokenized_dataset["train"],
+    eval_dataset=tokenized_dataset["test"],
+    compute_metrics=compute_metrics,
+    preprocess_logits_for_metrics=preprocess_logits_for_metrics,
+)
 
-
-if __name__ == "__main__":
-    main()
-
+trainer.train()
 {% endhighlight %}
 
 - `line 1-2`: 냠냠냠.
