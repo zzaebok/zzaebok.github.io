@@ -163,11 +163,10 @@ model_size = sum(t.numel() for t in model.parameters())
 print(f"Phi-1_5 size: {model_size/1000**3:.1f}B parameters")
 {% endhighlight %}
 
-{% highlight python linenos %}
-
 - `line 2`: 기본 Configuration (dimension size, n_heads 등) 은 microsoft의 pre-trained `phi-1_5`모델에서 가져왔다.
 - `line 10`: 우리는 Configuration을 이용하여 모델 weights를 새로 생성하기 때문에 `AutoModel`이 아닌 `PhiForCausalLM`을 직접 만든다.
 
+{% highlight python linenos %}
 # prepare evaluation metric
 def preprocess_logits_for_metrics(logits, labels):
     if isinstance(logits, tuple):
