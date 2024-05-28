@@ -1,6 +1,6 @@
 ---
 title: "얼렁뚱땅 LLM을 만들어보자 [2/3]"
-date: 2024-05-28 09:21:28 -0400
+date: 2024-05-27 21:58:28 -0400
 categories: machine_learning nlp
 ---
 
