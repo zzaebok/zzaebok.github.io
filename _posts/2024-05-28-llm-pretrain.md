@@ -96,7 +96,7 @@ from transformers import (
 from datasets import Dataset
 {% endhighlight %}
 
-- 냠냠냠
+- Pre-training되지 않은 Phi모델을 학습시키기 위해 `PhiForCausalLM`을 직접 import한다.
 
 {% highlight python linenos %}
 def load_txt_to_dataset(file_path: str):
@@ -107,8 +107,7 @@ def load_txt_to_dataset(file_path: str):
     return dataset
 {% endhighlight %}
 
-- 냠냠냠
-
+- Multi-line으로 이루어진 text 파일을 읽어 huggingface dataset을 만들어주는 코드이다.
 
 {% highlight python linenos %}
 # prepare dataset
@@ -117,6 +116,8 @@ dataset = dataset.select(range(100_000_000))
 dataset = dataset.train_test_split(test_size=0.001, shuffle=True, seed=42)
 print(dataset)
 {% endhighlight %}
+
+- 전체 Corpus는 3억개가 넘는 문장이 있지만, 이 예제에서는 1억개의 Sentence만 샘플링해서 사용한다. 너무 많아서 학습이 오래걸리기 때문.
 
 {% highlight python linenos %}
 # tokenize dataset
@@ -144,6 +145,9 @@ tokenized_dataset = dataset.map(
 print(tokenized_dataset)
 {% endhighlight %}
 
+- `line 2-3`: 최대 입력은 512로 한다. OpenAI 모델들은 이 길이가 4k 또는 8k까지 허용된다. `tokenizer`는 1단계에서 만들었던 [tokenizer](https://zzaebok.github.io/machine_learning/nlp/llm-tokenizer/) 경로를 입력한다.
+- `line 5`: 길이가 긴 Text들을 내가 설정한 max_length(512)에 맞게 자르고 tokenize하는 전처리 함수이다. `return_overflow_tokens`는 문장이 매우 길 경우 이를 512 단위의 여러 Segment로 반환하도록 한 것이다. (어차피 우리는 Next Word Prediction을 할 것이기 때문에 하나라도 버리지 않기 위함이다.)
+
 {% highlight python linenos %}
 # initialize model
 config = AutoConfig.from_pretrained(
@@ -160,6 +164,10 @@ print(f"Phi-1_5 size: {model_size/1000**3:.1f}B parameters")
 {% endhighlight %}
 
 {% highlight python linenos %}
+
+- `line 2`: 기본 Configuration (dimension size, n_heads 등) 은 microsoft의 pre-trained `phi-1_5`모델에서 가져왔다.
+- `line 10`: 우리는 Configuration을 이용하여 모델 weights를 새로 생성하기 때문에 `AutoModel`이 아닌 `PhiForCausalLM`을 직접 만든다.
+
 # prepare evaluation metric
 def preprocess_logits_for_metrics(logits, labels):
     if isinstance(logits, tuple):
@@ -180,6 +188,10 @@ def compute_metrics(eval_preds):
 
     return metric.compute(predictions=preds, references=labels)
 {% endhighlight %}
+
+- `line 2`: logits argument 내에 쓸데 없는 tensor들 때문에 CUDA OOM이 나는 것을 방지하기 위한 함수이다. 자세한 내용은 [이 링크](https://discuss.huggingface.co/t/cuda-out-of-memory-when-using-trainer-with-compute-metrics/2941/13)를 참조하면 된다.
+- `line 10`: huggingface `evaluate` 라이브러리에서 `accuracy` metric을 이용해서 evaluation 성능을 중간중간 평가한다. 사실 `accuracy`는 순서 상관 없이 단순히 토큰 등장만을 측정하므로 이 Pre-training에서 올바른 측정 도구가 아니다. 더 정확한 성능 평가를 위해 [다양한 metric](https://huggingface.co/evaluate-metric)을 살펴보아야 한다.
+- `line 12`: 모델의 predictions, 그리고 ground-truth labels을 `accuracy` metric에 전달한다. i번째 인덱스의 token에 대해 생성된 prediction[i]은 사실 i+1번째 word에 대한 prediction이기 때문에, 이 1칸 차이를 메꿔준다.
 
 {% highlight python linenos %}
 # train
@@ -222,7 +234,32 @@ trainer = Trainer(
 trainer.train()
 {% endhighlight %}
 
-- `line 1-2`: 냠냠냠.
+- huggingface `transformers` 라이브러리의 `Trainer`를 이용하여 학습을 진행한다.
+- `line 2`: Text 데이터를 뚝뚝 짤라 집어넣고, Next Word를 학습시키기 때문에 따로 Padding을 사용하지 않아, pad_token을 eos_token으로 사용한다.
+- `line 5-25`: Training arguments이며 학습에 쓰이는 hyper parameter 등을 명시해준다.
+    - 시간 문제로 training epoch은 2로 설정하였다.
+    - precision은 `bf16`을 사용하였다. 일반 부동소수점 `fp16`보다 표현할 수 있는 range가 넓어 Training 과정에서 overflow가 일어나지 않아 학습이 안정적이라고 한다. 자신의 GPU가 `bf16`을 지원하는지 확인해본 뒤 사용해야한다. 필자의 경우 A100을 이용했다.
+    - 마지막에 저장할 Best model을 선택할 때는 evaluation accuracy score가 가장 높은 모델을 선택한다.
+
+이렇게 학습을 진행하면 multi-node / multi-gpu 환경에서조차 시간이 꽤 걸리는 것을 확인할 수 있다.
+GPU 가격이나 학습에 사용되는 전력량, 데이터 사용량을 생각해봤을 때, 최근 들어 직접 Pre-training을 하는 곳이 현저히 줄어들고 Open-source Pre-trained LLM의 수요가 늘어나는 것을 이해할 수 있었다.
+
+## 추론 Code
+
+{% highlight python linenos %}
+import torch
+from transformers import pipeline
+
+device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
+pipe = pipeline(
+    "text-generation", model="model/pretrain/multinode", device=device, max_new_tokens=32, repetition_penalty=2.0
+)
+pipe("밥을 먹고 나면 늘 하는 생각이 있는데")[0]['generated_text']
+# 밥을 먹고 나면 늘 하는 생각이 있는데, ‘ 아! 이 맛에 사는구나 ’ 이다. 한 끼를 먹어도 맛있는 것을 먹어야 하고 좋은 곳을 가야만 한다며 내 몸을 혹사시킨다 싶은
+{% endhighlight %}
+
+- 추론은 `transformers`의 `pipeline`을 이용하면 쉽게 할 수 있다.
+- 학습된 모델을 pipeline에 올리고, 입력을 넣어주면 학습이 된대로 Next Word 들에 대해 쭉쭉쭉 주절주절하는 것을 관찰할 수 있다.
 
 ## References
 - https://huggingface.co/learn/nlp-course/en/chapter7/6
