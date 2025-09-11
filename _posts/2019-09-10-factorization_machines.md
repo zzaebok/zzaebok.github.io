@@ -1,8 +1,8 @@
 ---
-title: "Factorization Machines - 추천 알고리즘"
-date: 2019-09-10 19:18:28 -0400
+title: Factorization Machines - 추천 알고리즘
+date: 2019-09-10 19:18:28.000000000 -04:00
 categories: recommender_system
-permalink: /machine_learning/factorization_machines/
+redirect_to: https://jaebok-lee.com/posts/factorization-machines
 ---
 
 <script type="text/x-mathjax-config">

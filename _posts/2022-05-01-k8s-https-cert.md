@@ -1,7 +1,8 @@
 ---
-title: "쿠버네티스 Ingress에 HTTPS 연결 적용하기"
-date: 2022-05-01 22:20:28 -0400
+title: 쿠버네티스 Ingress에 HTTPS 연결 적용하기
+date: 2022-05-01 22:20:28.000000000 -04:00
 categories: kubernetes
+redirect_to: https://jaebok-lee.com/posts/k8s-https-cert
 ---
 
 <script type="text/x-mathjax-config">

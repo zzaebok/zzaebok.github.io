@@ -1,7 +1,8 @@
 ---
-title: "Preference Optimization"
+title: Preference Optimization
 date: 2024-12-11 08:56:28 -0400
 categories: machine_learning nlp
+redirect_to: https://jaebok-lee.com/posts/preference-optimization
 ---
 
 <script type="text/x-mathjax-config">

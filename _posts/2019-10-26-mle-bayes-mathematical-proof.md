@@ -1,7 +1,8 @@
 ---
-title: "최대 우도 추정과 베이즈 정리의 간단한 수학적 증명"
-date: 2019-10-26 16:17:28 -0400
+title: 최대 우도 추정과 베이즈 정리의 간단한 수학적 증명
+date: 2019-10-26 16:17:28.000000000 -04:00
 categories: machine_learning
+redirect_to: https://jaebok-lee.com/posts/mle-bayes-mathematical-proof
 ---
 
 <script type="text/x-mathjax-config">

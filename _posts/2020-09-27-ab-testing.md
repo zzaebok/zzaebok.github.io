@@ -1,8 +1,9 @@
 ---
-title: "A/B 테스트와 예제"
-date: 2020-09-27 15:23:28 -0400
+title: A/B 테스트와 예제
+date: 2020-09-27 15:23:28.000000000 -04:00
 categories: recommender_system
-permalink: /ab_test/ab-testing/
+permalink: "/ab_test/ab-testing/"
+redirect_to: https://jaebok-lee.com/posts/ab-testing
 ---
 
 <script type="text/x-mathjax-config">

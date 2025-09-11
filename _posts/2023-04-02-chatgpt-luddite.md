@@ -1,7 +1,8 @@
 ---
-title: "ChatGPT와 제2의 러다이트 운동"
-date: 2023-02-17 23:05:28 -0400
+title: ChatGPT와 제2의 러다이트 운동
+date: 2023-02-17 23:05:28.000000000 -04:00
 categories: essay
+redirect_to: https://jaebok-lee.com/posts/chatgpt-luddite
 ---
 
 <script type="text/x-mathjax-config">

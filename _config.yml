@@ -232,6 +232,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-include-cache
+  - jekyll-redirect-from
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -239,6 +240,7 @@ whitelist:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-include-cache
+  - jekyll-redirect-from
 
 
 # Archives

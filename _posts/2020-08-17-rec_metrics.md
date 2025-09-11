@@ -1,8 +1,9 @@
 ---
-title: "추천시스템에 사용되는 metrics 정리"
-date: 2020-08-18 18:49:28 -0400
+title: 추천시스템에 사용되는 metrics 정리
+date: 2020-08-18 18:49:28.000000000 -04:00
 categories: recommender_system
-permalink: /recommender_system/metrics/rec_metrics/
+permalink: "/recommender_system/metrics/rec_metrics/"
+redirect_to: https://jaebok-lee.com/posts/rec-metrics
 ---
 
 <script type="text/x-mathjax-config">

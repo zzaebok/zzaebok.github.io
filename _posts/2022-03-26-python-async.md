@@ -1,7 +1,8 @@
 ---
-title: "파이썬 비동기 프로그래밍 asyncio 겉핥기"
-date: 2022-03-26 07:01:28 -0400
+title: 파이썬 비동기 프로그래밍 asyncio 겉핥기
+date: 2022-03-26 07:01:28.000000000 -04:00
 categories: python
+redirect_to: https://jaebok-lee.com/posts/python-async
 ---
 
 <script type="text/x-mathjax-config">

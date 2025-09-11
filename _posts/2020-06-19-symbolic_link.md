@@ -1,7 +1,8 @@
 ---
-title: "심볼릭 링크와 하드 링크"
-date: 2020-06-19 19:17:28 -0400
+title: 심볼릭 링크와 하드 링크
+date: 2020-06-19 19:17:28.000000000 -04:00
 categories: linux
+redirect_to: https://jaebok-lee.com/posts/symbolic-link
 ---
 
 <script type="text/x-mathjax-config">

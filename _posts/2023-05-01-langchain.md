@@ -1,7 +1,8 @@
 ---
-title: "ChatGPT를 넘어, LangChain 정리"
-date: 2023-05-01 13:22:28 -0400
+title: ChatGPT를 넘어, LangChain 정리
+date: 2023-05-01 13:22:28.000000000 -04:00
 categories: machine_learning llm
+redirect_to: https://jaebok-lee.com/posts/langchain
 ---
 
 <script type="text/x-mathjax-config">

@@ -1,7 +1,8 @@
 ---
-title: "Entropy와 Mutual Information"
-date: 2021-01-24 22:40:28 -0400
+title: Entropy와 Mutual Information
+date: 2021-01-24 22:40:28.000000000 -04:00
 categories: machine_learning
+redirect_to: https://jaebok-lee.com/posts/entropy-and-mutual-information
 ---
 
 <script type="text/x-mathjax-config">

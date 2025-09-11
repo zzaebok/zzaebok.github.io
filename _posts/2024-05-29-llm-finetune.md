@@ -1,7 +1,8 @@
 ---
-title: "얼렁뚱땅 LLM을 만들어보자 [3/3]"
-date: 2024-05-28 21:56:28 -0400
+title: 얼렁뚱땅 LLM을 만들어보자 [3/3]
+date: 2024-05-28 21:56:28.000000000 -04:00
 categories: machine_learning nlp
+redirect_to: https://jaebok-lee.com/posts/llm-finetune
 ---
 
 <script type="text/x-mathjax-config">

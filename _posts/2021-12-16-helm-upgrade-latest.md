@@ -1,7 +1,8 @@
 ---
-title: "Helm upgrade 할 때 latest 이미지가 사용되지 않는 경우 해결법"
-date: 2021-12-16 20:03:28 -0400
+title: Helm upgrade 할 때 latest 이미지가 사용되지 않는 경우 해결법
+date: 2021-12-16 20:03:28.000000000 -04:00
 categories: kubernetes
+redirect_to: https://jaebok-lee.com/posts/helm-upgrade-latest
 ---
 
 <script type="text/x-mathjax-config">

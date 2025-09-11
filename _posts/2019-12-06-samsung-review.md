@@ -1,8 +1,9 @@
 ---
-title: "2019 삼성전자 공채 후기"
-date: 2019-12-06 14:26:28 -0400
+title: 2019 삼성전자 공채 후기
+date: 2019-12-06 14:26:28.000000000 -04:00
 categories: interview
-permalink: /interview/review/samsung-review/
+permalink: "/interview/review/samsung-review/"
+redirect_to: https://jaebok-lee.com/posts/samsung-review
 ---
 
 <script type="text/x-mathjax-config">
