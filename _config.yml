@@ -107,8 +107,8 @@ analytics:
 # Site Author
 author:
   name: "zzaebok"
-  avatar: ""
-  bio: ""
+  avatar:
+  bio:
   home: "https://zzaebok.github.io"
   location: "Seoul, Korea"
   email:
