@@ -2,7 +2,7 @@
 title: THE RIGHT IT, 될놈을 찾아라
 date: 2022-09-11 09:58:28.000000000 -04:00
 categories: business
-redirect_to: https://jaebok-lee.com/posts/the-right-it
+redirect_to: https://www.jaebok-lee.com/posts/ko/the-right-it
 ---
 
 <script type="text/x-mathjax-config">

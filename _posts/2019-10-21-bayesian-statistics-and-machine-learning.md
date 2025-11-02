@@ -2,7 +2,7 @@
 title: 베이지안 통계와 머신 러닝
 date: 2019-10-21 21:12:28.000000000 -04:00
 categories: machine_learning
-redirect_to: https://jaebok-lee.com/posts/bayesian-statistics-and-machine-learning
+redirect_to: https://www.jaebok-lee.com/posts/ko/bayesian-statistics-and-machine-learning
 ---
 
 <script type="text/x-mathjax-config">

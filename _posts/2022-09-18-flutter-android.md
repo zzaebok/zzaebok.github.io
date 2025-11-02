@@ -2,7 +2,7 @@
 title: Flutter에서 Android 액티비티를 실행하는 방법
 date: 2022-09-17 09:58:28.000000000 -04:00
 categories: flutter
-redirect_to: https://jaebok-lee.com/posts/flutter-android
+redirect_to: https://www.jaebok-lee.com/posts/ko/flutter-android
 ---
 
 <script type="text/x-mathjax-config">

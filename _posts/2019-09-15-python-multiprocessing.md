@@ -2,7 +2,7 @@
 title: Python multiprocessing 파이썬 병렬처리
 date: 2019-09-15 13:38:28.000000000 -04:00
 categories: python
-redirect_to: https://jaebok-lee.com/posts/python-multiprocessing
+redirect_to: https://www.jaebok-lee.com/posts/ko/python-multiprocessing
 ---
 
 <script type="text/x-mathjax-config">

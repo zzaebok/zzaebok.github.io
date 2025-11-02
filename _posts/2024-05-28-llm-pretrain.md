@@ -2,7 +2,7 @@
 title: 얼렁뚱땅 LLM을 만들어보자 [2/3]
 date: 2024-05-27 21:56:28.000000000 -04:00
 categories: machine_learning nlp
-redirect_to: https://jaebok-lee.com/posts/llm-pretrain
+redirect_to: https://www.jaebok-lee.com/posts/ko/llm-pretrain
 ---
 
 <script type="text/x-mathjax-config">

@@ -2,7 +2,7 @@
 title: Flutter에서 Nested ListView보단 Sliver와 ScrollView를 사용해야하는 이유
 date: 2022-09-17 09:58:28.000000000 -04:00
 categories: flutter
-redirect_to: https://jaebok-lee.com/posts/flutter-nested-listview
+redirect_to: https://www.jaebok-lee.com/posts/ko/flutter-nested-listview
 ---
 
 <script type="text/x-mathjax-config">

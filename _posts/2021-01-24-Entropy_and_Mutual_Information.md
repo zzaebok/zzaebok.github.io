@@ -2,7 +2,7 @@
 title: Entropy와 Mutual Information
 date: 2021-01-24 22:40:28.000000000 -04:00
 categories: machine_learning
-redirect_to: https://jaebok-lee.com/posts/entropy-and-mutual-information
+redirect_to: https://www.jaebok-lee.com/posts/ko/entropy-and-mutual-information
 ---
 
 <script type="text/x-mathjax-config">

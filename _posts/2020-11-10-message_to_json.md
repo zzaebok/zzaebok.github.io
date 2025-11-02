@@ -3,7 +3,7 @@ title: Grpc protocol buffer message to JSON 변환
 date: 2020-11-10 19:18:28.000000000 -04:00
 categories: backend
 permalink: "/grpc/message_to_json/"
-redirect_to: https://jaebok-lee.com/posts/message-to-json
+redirect_to: https://www.jaebok-lee.com/posts/ko/message-to-json
 ---
 
 <script type="text/x-mathjax-config">

@@ -3,7 +3,7 @@ title: 지식그래프를 통한 설명력있는 추천
 date: 2020-04-02 12:32:28.000000000 -04:00
 categories: recommender_system knowledge_graph
 permalink: "/paper/explainable_reasoning_over_kg_for_recommendation/"
-redirect_to: https://jaebok-lee.com/posts/explainable-reasoning-over-kg-for-recommendation
+redirect_to: https://www.jaebok-lee.com/posts/ko/explainable-reasoning-over-kg-for-recommendation
 ---
 
 <script type="text/x-mathjax-config">

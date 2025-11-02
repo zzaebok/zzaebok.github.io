@@ -2,7 +2,7 @@
 title: 얼렁뚱땅 LLM을 만들어보자 [1/3]
 date: 2024-05-18 21:21:28.000000000 -04:00
 categories: machine_learning nlp
-redirect_to: https://jaebok-lee.com/posts/llm-tokenizer
+redirect_to: https://www.jaebok-lee.com/posts/ko/llm-tokenizer
 ---
 
 <script type="text/x-mathjax-config">

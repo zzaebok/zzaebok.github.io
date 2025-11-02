@@ -2,7 +2,7 @@
 title: EM 알고리즘
 date: 2021-01-26 20:51:28.000000000 -04:00
 categories: machine_learning
-redirect_to: https://jaebok-lee.com/posts/em-algorithm
+redirect_to: https://www.jaebok-lee.com/posts/ko/em-algorithm
 ---
 
 <script type="text/x-mathjax-config">

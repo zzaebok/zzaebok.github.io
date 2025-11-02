@@ -3,7 +3,7 @@ title: 2020 카카오 신입 개발자 블라인드 채용 후기
 date: 2019-11-27 14:12:28.000000000 -04:00
 categories: interview
 permalink: "/interview/review/kakao_review/"
-redirect_to: https://jaebok-lee.com/posts/kakao-review
+redirect_to: https://www.jaebok-lee.com/posts/ko/kakao-review
 ---
 
 <script type="text/x-mathjax-config">

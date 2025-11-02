@@ -3,7 +3,7 @@ title: Federated Learning 정리
 date: 2020-12-06 10:18:28.000000000 -04:00
 categories: machine_learning
 permalink: "/federated_learning/machine_learning/Federated_Learning/"
-redirect_to: https://jaebok-lee.com/posts/federated-learning
+redirect_to: https://www.jaebok-lee.com/posts/ko/federated-learning
 ---
 
 <script type="text/x-mathjax-config">

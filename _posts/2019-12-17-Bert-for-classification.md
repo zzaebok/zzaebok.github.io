@@ -3,7 +3,7 @@ title: BERT를 이용한 Classification 예제
 date: 2019-12-17 15:23:28.000000000 -04:00
 categories: machine_learning
 permalink: "/deep_learning/nlp/Bert-for-classification/"
-redirect_to: https://jaebok-lee.com/posts/bert-for-classification
+redirect_to: https://www.jaebok-lee.com/posts/ko/bert-for-classification
 ---
 
 <script type="text/x-mathjax-config">
