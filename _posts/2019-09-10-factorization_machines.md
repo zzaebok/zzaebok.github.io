@@ -2,7 +2,7 @@
 title: Factorization Machines - 추천 알고리즘
 date: 2019-09-10 19:18:28.000000000 -04:00
 categories: recommender_system
-redirect_to: https://jaebok-lee.com/posts/factorization-machines
+redirect_to: https://jaebok-lee.com/posts/ko/factorization-machines
 ---
 
 <script type="text/x-mathjax-config">
