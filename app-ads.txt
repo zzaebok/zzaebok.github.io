@@ -1,0 +1,16 @@
+# app-ads.txt — https://zzaebok.github.io/app-ads.txt
+#
+# IAB Tech Lab app-ads.txt spec. Must live at the domain ROOT.
+# Per-app paths (/press-it/app-ads.txt) are never crawled — this one
+# file authorizes every app whose App Store listing points here.
+#
+# Sibling file: ads.txt (same publisher, for website/AdSense inventory).
+#
+# Covers: Hydraulic Press (press-it), Unlock Hanzi,
+#         ping-me-on, roast-marshmallow
+# Each app's App Store "Marketing URL" must be https://zzaebok.github.io
+#
+# Format: <ad system domain>, <publisher id>, <DIRECT|RESELLER>, <cert authority id>
+
+# AdMob / Google — account pub-1308834300792217
+google.com, pub-1308834300792217, DIRECT, f08c47fec0942fa0
